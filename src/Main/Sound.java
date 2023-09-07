@@ -11,11 +11,11 @@ public class Sound {
 
     public Sound() {
 
-        soundURL[0] = getClass().getResource("/Res/sounds/Background.wav");
-        soundURL[1] = getClass().getResource("/Res/sounds/coin.wav");
-        soundURL[2] = getClass().getResource("/Res/sounds/powerup.wav");
-        soundURL[3] = getClass().getResource("/Res/sounds/unlock.wav");
-        soundURL[4] = getClass().getResource("/Res/sounds/fanfare.wav");
+        soundURL[0] = getClass().getResource("/Res/sound/Background.wav");
+        soundURL[1] = getClass().getResource("/Res/sound/coin.wav");
+        soundURL[2] = getClass().getResource("/Res/sound/powerup.wav");
+        soundURL[3] = getClass().getResource("/Res/sound/unlock.wav");
+        soundURL[4] = getClass().getResource("/Res/sound/fanfare.wav");
     }
 
     public void setFile(int i) {
@@ -25,6 +25,7 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(ais);
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
