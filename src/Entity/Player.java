@@ -125,32 +125,40 @@ public class Player extends Entity{
     public void pickUpObject(int i) {
         if (i != 999) {
 
-//            gp.obj[i] = null;
-
             String objectName = gp.obj[i].name;
 
             switch (objectName) {
                 case "Key" -> {
                     gp.playSE(1);
                     gp.obj[i] = null;
+                    gp.ui.showMessage("You picked up a key!");
                     hasKey++;
-                    System.out.println("You picked up a key! You now have " + hasKey + " keys.");
                 }
                 case "Door" -> {
                     if (hasKey > 0) {
                         gp.playSE(3);
                         gp.obj[i] = null;
+                        gp.ui.showMessage("You used a key to open the door!");
                         hasKey--;
-                        System.out.println("You used a key to open the door. You now have " + hasKey + " keys left.");
                     } else {
-                        System.out.println("You need a key to open this door.");
+                        gp.ui.showMessage("You need a key to open this door!");
                     }
+
                 }
                 case "Boots" -> {
                     gp.playSE(2);
                     gp.obj[i] = null;
+                    gp.ui.showMessage("You picked up boots! You can now move faster.");
                     speed = 7;
-                    System.out.println("You picked up boots! You can now move faster.");
+                }
+                case "Chest" -> {
+                    gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    gp.playSE(4);
+
+//                    gp.playSE(4);
+//                    gp.obj[i] = null;
+//                    gp.ui.showMessage("You opened the chest and found a key!");
                 }
             }
 
