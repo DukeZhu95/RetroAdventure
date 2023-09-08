@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class UI {
@@ -18,6 +19,7 @@ public class UI {
     int messageTimer = 0;
     public boolean gameFinished = false;
     double playTime;
+    DecimalFormat dFormat = new DecimalFormat("0.00");
 
     public UI() {
         try {
@@ -63,6 +65,12 @@ public class UI {
             y = gp.ScreenHeight / 2 - (gp.tileSize * 3);
             g2.drawString(text, x, y);
 
+            text = "You spent: " + dFormat.format(playTime) + "!";
+            textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            x = gp.ScreenWidth / 2 - textLength / 2;
+            y = gp.ScreenHeight / 2 + (gp.tileSize * 4);
+            g2.drawString(text, x, y);
+
             g2.setFont(pixelatedFont_80Bold);
             g2.setColor(Color.YELLOW);
             text = "CONGRATULATIONS! ";
@@ -93,7 +101,7 @@ public class UI {
 
             // Timer
             playTime += (double) 1/ 60;
-            g2.drawString("Time: " + (int)playTime, gp.ScreenWidth - 200, 50);
+            g2.drawString("Time: " + dFormat.format(playTime), gp.ScreenWidth - 220, 50);
 
             // Message
             if (messageOn) {
