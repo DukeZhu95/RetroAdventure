@@ -14,7 +14,7 @@ public class Player extends Entity{
     KeyboardHandler KeyboardHandler;
     public final int screenX;
     public final int screenY;
-    int hasKey = 0;
+    public int hasKey = 0;
 
     public Player (GamePanel gp, KeyboardHandler KeyboardHandler) {
         this.gp = gp;
