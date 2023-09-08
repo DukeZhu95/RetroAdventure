@@ -31,6 +31,13 @@ public class Player extends Entity{
         solidArea.width = 64;
         solidArea.height = 60;
 
+        // Modify the solid area to make it smaller
+        solidArea.x += 10;
+        solidArea.y += 10;
+        solidArea.width -= 5;
+        solidArea.height -= 10;
+
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -228,9 +235,6 @@ public class Player extends Entity{
 
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
-        // Draw collision area for testing
-        g2.setColor(Color.RED); // 设置碰撞矩形的颜色为红色
-        g2.drawRect(worldX + solidArea.x, worldY + solidArea.y, solidArea.width, solidArea.height);
     }
 
     private boolean incrementing = true;

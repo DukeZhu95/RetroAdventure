@@ -101,7 +101,7 @@ public class UI {
 
             // Timer
             playTime += (double) 1/ 60;
-            g2.drawString("Time: " + dFormat.format(playTime), gp.ScreenWidth - 220, 50);
+            g2.drawString("Time: " + dFormat.format(playTime), gp.ScreenWidth - 230, 50);
 
             // Message
             if (messageOn) {
