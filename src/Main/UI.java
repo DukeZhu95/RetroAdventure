@@ -100,8 +100,8 @@ public class UI {
             g2.drawString("x " + gp.player.hasKey, xPosition + newWidth + 8, textYPosition + 15);
 
             // Timer
-            playTime += (double) 1/ 60;
-            g2.drawString("Time: " + dFormat.format(playTime), gp.ScreenWidth - 230, 50);
+//            playTime += (double) 1/ 60;
+//            g2.drawString("Time: " + dFormat.format(playTime), gp.ScreenWidth - 230, 50);
 
             // Message
             if (messageOn) {
