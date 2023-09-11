@@ -15,14 +15,13 @@ public class Player extends Entity{
     KeyboardHandler KeyboardHandler;
     public final int screenX;
     public final int screenY;
-    public int hasKey = 0;
 
     public Player (GamePanel gp, KeyboardHandler KeyboardHandler) {
         this.gp = gp;
         this.KeyboardHandler = KeyboardHandler;
 
-        screenX = gp.ScreenWidth / 2 - gp.tileSize / 2;
-        screenY = gp.ScreenHeight / 2 - gp.tileSize / 2;
+        screenX = gp.screenWidth / 2 - gp.tileSize / 2;
+        screenY = gp.screenHeight / 2 - gp.tileSize / 2;
 
         solidArea = new Rectangle();
         solidArea.x = 16;
@@ -46,29 +45,12 @@ public class Player extends Entity{
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
-        speed = 5;
+        speed = 3;
         direction = "down";
         spriteNum = 2;
     }
 
     public void getPlayerImage() {
-//        try {
-//            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_left.png")));
-//            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_stand.png")));
-//            up3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_right.png")));
-//            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_forward_left.png")));
-//            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_stand.png")));
-//            down3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_forward_right.png")));
-//            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_handforward.png")));
-//            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_stand.png")));
-//            left3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_handback.png")));
-//            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_handback.png")));
-//            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_stand.png")));
-//            right3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_handforward.png")));
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         up1 = setup("Male_back_left");
         up2 = setup("Male_back_stand");
@@ -161,58 +143,6 @@ public class Player extends Entity{
     public void pickUpObject(int i) {
         if (i != 999) {
 
-            String objectName = gp.obj[i].name;
-
-            switch (objectName) {
-                case "Key" -> {
-                    gp.playSE(1);
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("You picked up a key!");
-                    hasKey++;
-                }
-                case "Door" -> {
-                    if (hasKey > 0) {
-                        gp.playSE(3);
-                        gp.obj[i] = null;
-                        gp.ui.showMessage("You used a key to open the door!");
-                        hasKey--;
-                    } else {
-                        gp.ui.showMessage("You need a key to open this door!");
-                    }
-
-                }
-                case "Boots" -> {
-                    gp.playSE(2);
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("You picked up boots! You can now move faster.");
-                    speed = 7;
-                }
-                case "Chest" -> {
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
-
-//                    gp.playSE(4);
-//                    gp.obj[i] = null;
-//                    gp.ui.showMessage("You opened the chest and found a key!");
-                }
-            }
-
-//            String objectName = gp.obj[i].name;
-//
-//            switch (objectName) {
-//                case "key" -> {
-//                    gp.obj[i] = null;
-//                    hasKey++;
-//                }
-//                case "door" -> {
-//                    if (hasKey > 0) {
-//                        gp.obj[i] = null;
-//                        hasKey--;
-//                    }
-//                }
-//
-//            }
         }
     }
 

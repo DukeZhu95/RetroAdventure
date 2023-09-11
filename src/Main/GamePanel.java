@@ -15,8 +15,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int tileSize = originalTileSize * scale; // 96x96 pixels
     public final int maxScreenColumns = 16; // 16 tiles wide
     public final int maxScreenRows = 9; // 9 tiles tall
-    public final int ScreenWidth = tileSize * maxScreenColumns; // 1536 pixels wide
-    public final int ScreenHeight = tileSize * maxScreenRows; // 864 pixels tall
+    public final int screenWidth = tileSize * maxScreenColumns; // 1536 pixels wide
+    public final int screenHeight = tileSize * maxScreenRows; // 864 pixels tall
 
     // World Settings
     public final int maxWorldColumns = 50;
@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // System Settings
     TileManager tileManager = new TileManager(this);
-    KeyboardHandler keyboardHandler = new KeyboardHandler();
+    KeyboardHandler keyboardHandler = new KeyboardHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
     public CollisionChecker collisionChecker = new CollisionChecker(this);
@@ -37,8 +37,13 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player(this, keyboardHandler);
     public SuperObject[] obj = new SuperObject[10];
 
+    // Game State
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
     public GamePanel() {
-        this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyboardHandler);
@@ -48,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame() {
         aSetter.setObject();
         playMusic(0);
+        gameState = playState;
     }
 
     public void startGameThread() {
@@ -118,7 +124,17 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    public void update() { player.update(); }
+    public void update() {
+
+        if (gameState == playState) {
+            player.update();
+        }
+        if (gameState == pauseState) {
+            // Do nothing
+        }
+
+        player.update();
+    }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
