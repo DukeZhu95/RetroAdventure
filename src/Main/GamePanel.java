@@ -132,8 +132,6 @@ public class GamePanel extends JPanel implements Runnable{
         if (gameState == pauseState) {
             // Do nothing
         }
-
-        player.update();
     }
 
     public void paintComponent(Graphics g) {
