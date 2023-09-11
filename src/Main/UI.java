@@ -39,7 +39,7 @@ public class UI {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        OBJ_Key key = new OBJ_Key();
+        OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
     }
 

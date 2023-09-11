@@ -2,6 +2,7 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyboardHandler;
+import Main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -51,23 +52,50 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage() {
-        try {
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_left.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_stand.png")));
-            up3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_right.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_forward_left.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_stand.png")));
-            down3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_forward_right.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_handforward.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_stand.png")));
-            left3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_handback.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_handback.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_stand.png")));
-            right3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_handforward.png")));
+//        try {
+//            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_left.png")));
+//            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_stand.png")));
+//            up3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_back_right.png")));
+//            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_forward_left.png")));
+//            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_stand.png")));
+//            down3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_forward_right.png")));
+//            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_handforward.png")));
+//            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_stand.png")));
+//            left3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_left_handback.png")));
+//            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_handback.png")));
+//            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_stand.png")));
+//            right3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/Male_right_handforward.png")));
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        } catch (IOException e) {
+        up1 = setup("Male_back_left");
+        up2 = setup("Male_back_stand");
+        up3 = setup("Male_back_right");
+        down1 = setup("Male_forward_left");
+        down2 = setup("Male_stand");
+        down3 = setup("Male_forward_right");
+        left1 = setup("Male_left_handforward");
+        left2 = setup("Male_left_stand");
+        left3 = setup("Male_left_handback");
+        right1 = setup("Male_right_handback");
+        right2 = setup("Male_right_stand");
+        right3 = setup("Male_right_handforward");
+    }
+
+    public BufferedImage setup(String imageName) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/" + imageName + ".png")));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+        }catch (IOException e) {
             e.printStackTrace();
         }
+        return image;
     }
 
     public void update() {
@@ -234,7 +262,7 @@ public class Player extends Entity{
             }
         }
 
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, null);
 
     }
 
