@@ -14,6 +14,7 @@ public class Player extends Entity{
     KeyboardHandler KeyboardHandler;
     public final int screenX;
     public final int screenY;
+    private boolean incrementing = true;
 
     public Player (GamePanel gp, KeyboardHandler KeyboardHandler) {
         super(gp);
@@ -89,6 +90,10 @@ public class Player extends Entity{
             int objIndex = gp.collisionChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
+            // Check for collision with NPC
+            int npcIndex = gp.collisionChecker.chekcEntity(this, gp.npc);
+            interactWithNpc(npcIndex);
+
             // If collision is not detected, move the player
             if (!collisionOn) {
 
@@ -128,6 +133,12 @@ public class Player extends Entity{
     public void pickUpObject(int i) {
         if (i != 999) {
 
+        }
+    }
+
+    public void interactWithNpc(int i) {
+        if (i != 999) {
+            System.out.println("You are hitting the NPC");
         }
     }
 
@@ -181,5 +192,5 @@ public class Player extends Entity{
 
     }
 
-    private boolean incrementing = true;
+
 }
