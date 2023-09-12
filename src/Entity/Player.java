@@ -11,13 +11,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Player extends Entity{
-    GamePanel gp;
     KeyboardHandler KeyboardHandler;
     public final int screenX;
     public final int screenY;
 
     public Player (GamePanel gp, KeyboardHandler KeyboardHandler) {
-        this.gp = gp;
+        super(gp);
         this.KeyboardHandler = KeyboardHandler;
 
         screenX = gp.screenWidth / 2 - gp.tileSize / 2;
@@ -52,32 +51,18 @@ public class Player extends Entity{
 
     public void getPlayerImage() {
 
-        up1 = setup("Male_back_left");
-        up2 = setup("Male_back_stand");
-        up3 = setup("Male_back_right");
-        down1 = setup("Male_forward_left");
-        down2 = setup("Male_stand");
-        down3 = setup("Male_forward_right");
-        left1 = setup("Male_left_handforward");
-        left2 = setup("Male_left_stand");
-        left3 = setup("Male_left_handback");
-        right1 = setup("Male_right_handback");
-        right2 = setup("Male_right_stand");
-        right3 = setup("Male_right_handforward");
-    }
-
-    public BufferedImage setup(String imageName) {
-
-        UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/player/" + imageName + ".png")));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        return image;
+        up1 = setup("/Res/player/Male_back_left");
+        up2 = setup("/Res/player/Male_back_stand");
+        up3 = setup("/Res/player/Male_back_right");
+        down1 = setup("/Res/player/Male_forward_left");
+        down2 = setup("/Res/player/Male_stand");
+        down3 = setup("/Res/player/Male_forward_right");
+        left1 = setup("/Res/player/Male_left_handforward");
+        left2 = setup("/Res/player/Male_left_stand");
+        left3 = setup("/Res/player/Male_left_handback");
+        right1 = setup("/Res/player/Male_right_handback");
+        right2 = setup("/Res/player/Male_right_stand");
+        right3 = setup("/Res/player/Male_right_handforward");
     }
 
     public void update() {

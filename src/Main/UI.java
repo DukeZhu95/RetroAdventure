@@ -16,10 +16,6 @@ public class UI {
     Graphics2D g2;
     public boolean messageOn = false;
     public String message = "";
-    int messageTimer = 0;
-    public boolean gameFinished = false;
-    double playTime;
-    DecimalFormat dFormat = new DecimalFormat("0.00");
 
     public UI() {
         try {

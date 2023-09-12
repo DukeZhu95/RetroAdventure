@@ -25,7 +25,7 @@ public class TileManager {
     }
 
     public void getTileImage() {
-//        try {
+
         // Placeholder
         setup(0, "grass00", false);
         setup(1, "grass00", true);
@@ -71,34 +71,6 @@ public class TileManager {
         setup(39, "earth", false);
         setup(40, "wall", true);
         setup(41, "tree", true);
-
-
-
-
-//            tile[0] = new Tile();
-//            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/tiles/Grass.png")));
-//
-//            tile[1] = new Tile();
-//            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/tiles/Wall.png")));
-//            tile[1].collision = true;
-//
-//            tile[2] = new Tile();
-//            tile[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/tiles/water00.png")));
-//            tile[2].collision = true;
-//
-//            tile[3] = new Tile();
-//            tile[3].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/tiles/Earth.png")));
-//
-//            tile[4] = new Tile();
-//            tile[4].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/tiles/Tree.png")));
-//            tile[4].collision = true;
-//
-//            tile[5] = new Tile();
-//            tile[5].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Res/tiles/Sand.png")));
-
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void setup(int index, String imageName, boolean collision) {
