@@ -13,6 +13,7 @@ public class NPC_Tigger extends Entity {
         speed = 1;
 
         getImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -29,6 +30,13 @@ public class NPC_Tigger extends Entity {
         right1 = setup("/Res/npc/tigger_right_1");
         right2 = setup("/Res/npc/tigger_right_2");
         right3 = setup("/Res/npc/tigger_right_3");
+    }
+
+    public void setDialogue() {
+        dialogues[0] = "Hello, I am Tigger.";
+        dialogues[1] = "I am a tiger.";
+        dialogues[2] = "I am a tiger named Tigger.";
+        dialogues[3] = "I am a tiger named Tigger who lives in the Hundred Acre Wood.";
     }
 
     public void setAction() {
@@ -56,5 +64,10 @@ public class NPC_Tigger extends Entity {
 
             actionLockCounter = 0;
         }
+    }
+
+    public void speak() {
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
     }
 }

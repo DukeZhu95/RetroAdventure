@@ -25,30 +25,43 @@ public class KeyboardHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if (code == KeyEvent.VK_W) {
-            upPressed = true;
-        }
-        if (code == KeyEvent.VK_S) {
-            downPressed = true;
-        }
-        if (code == KeyEvent.VK_A) {
-            leftPressed = true;
-        }
-        if (code == KeyEvent.VK_D) {
-            rightPressed = true;
-        }
-        if (code == KeyEvent.VK_SPACE) {
-            if (gp.gameState == gp.playState) {
-                gp.gameState = gp.pauseState;
+        // Play state
+        if (gp.gameState == gp.playState) {
+            if (code == KeyEvent.VK_W) {
+                upPressed = true;
             }
-            else if (gp.gameState == gp.pauseState) {
-                gp.gameState = gp.playState;
+            if (code == KeyEvent.VK_S) {
+                downPressed = true;
+            }
+            if (code == KeyEvent.VK_A) {
+                leftPressed = true;
+            }
+            if (code == KeyEvent.VK_D) {
+                rightPressed = true;
+            }
+            if (code == KeyEvent.VK_SPACE) {
+                gp.gameState = gp.pauseState;
             }
         }
 
         // Debug
         if (code == KeyEvent.VK_T) {
             checkDrawTime = !checkDrawTime;
+        }
+
+        // Pause state
+        else if (gp.gameState == gp.pauseState) {
+            if (code == KeyEvent.VK_SPACE) {
+                gp.gameState = gp.playState;
+            }
+        }
+
+        // Dialogue state
+        else if (gp.gameState == gp.dialogueState) {
+            if (code == KeyEvent.VK_ENTER) {
+//                gp.ui.currentDialogue = "";
+                gp.gameState = gp.playState;
+            }
         }
 
     }
