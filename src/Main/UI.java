@@ -69,14 +69,20 @@ public class UI {
         int x = gp.tileSize * 2;
         int y = gp.tileSize / 2;
         int width = gp.screenWidth - (gp.tileSize * 4);
-        int height = gp.tileSize * 5;
+        int height = gp.tileSize * 3;
 
         drawSubWindow(x, y, width, height);
 
+        g2.setColor(Color.WHITE);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32f));
         x += gp.tileSize;
         y += gp.tileSize;
         g2.drawString(currentDialogue, x, y);
+
+        for(String line : currentDialogue.split("\n")) {
+            g2.drawString(line, x, y);
+            y += 40;
+        }
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
@@ -84,7 +90,7 @@ public class UI {
         g2.setColor(c);
         g2.fillRoundRect(x, y, width, height, 35, 35);
 
-        c = new Color(255, 255, 255);
+        c = new Color(255, 255, 255 , 100);
         g2.setColor(c);
         g2.setStroke(new BasicStroke(5));
         g2.fillRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
