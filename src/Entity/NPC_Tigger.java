@@ -34,8 +34,8 @@ public class NPC_Tigger extends Entity {
 
     public void setDialogue() {
         dialogues[0] = "Hello, warrior, and welcome you here!";
-        dialogues[1] = "As you can see, this land is filled with many \n monsters, some of which are even deadly...";
-        dialogues[2] = "Defeat them and become a hero here. You can \n also meet my people in some shops. They will \n have the items you need for sale.";
+        dialogues[1] = "As you can see, this land is filled with many monsters, some \nof them are even fatal...";
+        dialogues[2] = "Defeat them and become a hero here. You can also meet \nmy people in some shops. They will have the items you \nneed for sale.";
         dialogues[3] = "Good luck!";
     }
 
@@ -67,17 +67,6 @@ public class NPC_Tigger extends Entity {
     }
 
     public void speak() {
-        if (dialogues[dialogueIndex] == null) {
-            dialogueIndex = 0;
-        }
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
-
-        switch (gp.player.direction) {
-            case "up" -> direction = "down";
-            case "down" -> direction = "up";
-            case "left" -> direction = "right";
-            case "right" -> direction = "left";
-        }
+        super.speak();
     }
 }

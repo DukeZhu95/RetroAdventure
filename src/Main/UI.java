@@ -1,13 +1,7 @@
 package Main;
 
-import object.OBJ_Key;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class UI {
@@ -77,7 +71,6 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32f));
         x += gp.tileSize;
         y += gp.tileSize;
-        g2.drawString(currentDialogue, x, y);
 
         for(String line : currentDialogue.split("\n")) {
             g2.drawString(line, x, y);
