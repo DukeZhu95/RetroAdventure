@@ -51,7 +51,7 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage() {
-
+        // Male Player
         up1 = setup("/Res/player/Male_back_left");
         up2 = setup("/Res/player/Male_back_stand");
         up3 = setup("/Res/player/Male_back_right");
@@ -64,6 +64,20 @@ public class Player extends Entity{
         right1 = setup("/Res/player/Male_right_handback");
         right2 = setup("/Res/player/Male_right_stand");
         right3 = setup("/Res/player/Male_right_handforward");
+
+        // Female Player
+        up1 = setup("/Res/player/Female_back_left");
+        up2 = setup("/Res/player/Female_back_stand");
+        up3 = setup("/Res/player/Female_back_right");
+        down1 = setup("/Res/player/Female_forward_left");
+        down2 = setup("/Res/player/Female_stand");
+        down3 = setup("/Res/player/Female_forward_right");
+        left1 = setup("/Res/player/Female_left_handforward");
+        left2 = setup("/Res/player/Female_left_stand");
+        left3 = setup("/Res/player/Female_left_handback");
+        right1 = setup("/Res/player/Female_right_handback");
+        right2 = setup("/Res/player/Female_right_stand");
+        right3 = setup("/Res/player/Female_right_handforward");
     }
 
     public void update() {
