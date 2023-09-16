@@ -1,5 +1,7 @@
 package Main;
 
+import Entity.Entity;
+
 import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
@@ -34,6 +36,11 @@ public class UI {
         g2.setFont(pixelatedFont);
         g2.setColor(Color.WHITE);
 
+        // Title state
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+        }
+
         // Play state
         if (gp.gameState == gp.playState) {
             // Do playState stuff later
@@ -47,6 +54,30 @@ public class UI {
         if (gp.gameState == gp.dialogueState) {
             drawDialogueScreen();
         }
+    }
+
+    public void drawTitleScreen() {
+        g2.setColor(new Color(0, 0, 0));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        // Title name
+        g2.setFont(pixelatedFont_80Bold.deriveFont(Font.BOLD, 112f));
+        String text = "Retro Adventure";
+        int x = getXforCenteredText(text);
+        int y = gp.tileSize * 3;
+
+        // Shadow
+        g2.setColor(Color.GRAY);
+        g2.drawString(text, x + 6, y + 6);
+
+        // Main color
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+
+        // Tigger image
+        x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
+        y += gp.tileSize * 2;
+        g2.drawImage(gp.player.down2, x, y, gp.tileSize * 2,gp.tileSize * 2,null);
     }
 
     public void drawPauseScreen() {
