@@ -13,6 +13,8 @@ public class UI {
     public boolean messageOn = false;
     public String message = "";
     public String currentDialogue = "";
+    public int commandNum = 0;
+    public int titleScreenState = 0; // 0 = the 1st screen, 1 = the 2nd screen
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -57,45 +59,93 @@ public class UI {
     }
 
     public void drawTitleScreen() {
-        g2.setColor(new Color(0, 0, 0));
-        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        if (titleScreenState == 0) {
+            g2.setColor(new Color(0, 0, 0));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
-        // Title name
-        g2.setFont(pixelatedFont_80Bold.deriveFont(Font.BOLD, 112f));
-        String text = "Retro Adventure";
-        int x = getXforCenteredText(text);
-        int y = gp.tileSize * 3;
+            // Title name
+            g2.setFont(pixelatedFont_80Bold.deriveFont(Font.BOLD, 112f));
+            String text = "Retro Adventure";
+            int x = getXforCenteredText(text);
+            int y = gp.tileSize * 3;
 
-        // Shadow
-        g2.setColor(Color.GRAY);
-        g2.drawString(text, x + 6, y + 6);
+            // Shadow
+            g2.setColor(Color.GRAY);
+            g2.drawString(text, x + 6, y + 6);
 
-        // Main color
-        g2.setColor(Color.WHITE);
-        g2.drawString(text, x, y);
+            // Main color
+            g2.setColor(Color.WHITE);
+            g2.drawString(text, x, y);
 
-        // Tigger image
-        x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
-        y += gp.tileSize;
-        g2.drawImage(gp.player.down2, x, y, gp.tileSize * 2,gp.tileSize * 2,null);
+            // Tigger image
+            x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
+            y += gp.tileSize;
+            g2.drawImage(gp.player.down2, x, y, gp.tileSize * 2,gp.tileSize * 2,null);
 
-        // Menu
-        g2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+            // Menu
+            g2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
 
-        text = "New Game";
-        x = getXforCenteredText(text);
-        y += gp.tileSize * 3;
-        g2.drawString(text, x, y);
+            text = "New Game";
+            x = getXforCenteredText(text);
+            y += gp.tileSize * 3;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
 
-        text = "Load Game";
-        x = getXforCenteredText(text);
-        y += (int) (gp.tileSize * 0.75);
-        g2.drawString(text, x, y);
+            text = "Load Game";
+            x = getXforCenteredText(text);
+            y += (int) (gp.tileSize * 0.75);
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
 
-        text = "Exit";
-        x = getXforCenteredText(text);
-        y += (int) (gp.tileSize * 0.75);
-        g2.drawString(text, x, y);
+            text = "Exit";
+            x = getXforCenteredText(text);
+            y += (int) (gp.tileSize * 0.75);
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+        }
+        else if (titleScreenState == 1) {
+            // Role selection
+            g2.setColor(Color.WHITE);
+
+            String text = "Select Your Gender";
+            g2.setFont(pixelatedFont_80Bold.deriveFont(Font.PLAIN, 112f));
+            int x = getXforCenteredText(text);
+            int y = gp.tileSize * 3;
+            g2.drawString(text, x, y);
+
+            text = "Male";
+            g2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+            x = getXforCenteredText(text);
+            y += gp.tileSize * 3;
+            g2.drawString(text, x, y);
+            if (commandNum == 0) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+
+            text = "Female";
+            g2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+            x = getXforCenteredText(text);
+            y += (int) (gp.tileSize * 0.75);
+            g2.drawString(text, x, y);
+            if (commandNum == 1) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+
+            text = "Back";
+            g2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+            x = getXforCenteredText(text);
+            y += (int) (gp.tileSize * 0.75);
+            g2.drawString(text, x, y);
+            if (commandNum == 2) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+        }
     }
 
     public void drawPauseScreen() {
