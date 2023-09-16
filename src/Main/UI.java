@@ -76,25 +76,26 @@ public class UI {
 
         // Tigger image
         x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
-        y += gp.tileSize * 2;
+        y += gp.tileSize;
         g2.drawImage(gp.player.down2, x, y, gp.tileSize * 2,gp.tileSize * 2,null);
 
-        // Menu use arial font
-        gp.setFont(new Font("Arial", Font.PLAIN, 32));
+        // Menu
+        g2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
 
         text = "New Game";
         x = getXforCenteredText(text);
-        y += gp.tileSize * 4;
+        y += gp.tileSize * 3;
         g2.drawString(text, x, y);
 
         text = "Load Game";
         x = getXforCenteredText(text);
-        y += gp.tileSize * 2;
+        y += (int) (gp.tileSize * 0.75);
         g2.drawString(text, x, y);
 
         text = "Exit";
         x = getXforCenteredText(text);
-        y += gp.tileSize * 2;
+        y += (int) (gp.tileSize * 0.75);
+        g2.drawString(text, x, y);
     }
 
     public void drawPauseScreen() {
