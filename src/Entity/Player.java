@@ -114,6 +114,9 @@ public class Player extends Entity{
             int npcIndex = gp.collisionChecker.chekcEntity(this, gp.npc);
             interactWithNpc(npcIndex);
 
+            // Check event
+            gp.eventHandler.checkEvent();
+
             // If collision is not detected, move the player
             if (!collisionOn) {
 
