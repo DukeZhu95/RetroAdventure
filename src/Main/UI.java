@@ -1,8 +1,11 @@
 package Main;
 
 import Entity.Entity;
+import object.OBJ_Heart;
+import object.SuperObject;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -10,6 +13,7 @@ public class UI {
     private Font pixelatedFont, pixelatedFont_80Bold;
     GamePanel gp;
     Graphics2D g2;
+    BufferedImage heart_full, heart_half, heart_empty;
     public boolean messageOn = false;
     public String message = "";
     public String currentDialogue = "";
@@ -26,6 +30,12 @@ public class UI {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
+
+        // Create HUD objects
+        SuperObject heart = new OBJ_Heart(gp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_empty = heart.image3;
     }
 
     public void showMessage(String text) {
@@ -45,16 +55,30 @@ public class UI {
 
         // Play state
         if (gp.gameState == gp.playState) {
-            // Do playState stuff later
+            drawPlayerLife();
         }
         // Pause state
         else
         if (gp.gameState == gp.pauseState) {
+            drawPlayerLife();
             drawPauseScreen();
         }
         // Dialogue state
         if (gp.gameState == gp.dialogueState) {
+            drawPlayerLife();
             drawDialogueScreen();
+        }
+    }
+
+    public void drawPlayerLife() {
+        int x = gp.tileSize / 2;
+        int y = gp.tileSize / 2;
+        int i = 0;
+
+        while(i < gp.player.maxLife / 2) {
+            g2.drawImage(heart_empty, x, y, null);
+            i++;
+            x += gp.tileSize;
         }
     }
 
