@@ -71,12 +71,14 @@ public class KeyboardHandler implements KeyListener {
                         gp.isMale = true;
                         gp.gameState = gp.playState;
                         gp.playMusic(0);
+                        gp.player.getPlayerImage();
                     }
                     if (gp.ui.commandNum == 1) {
                         // You are a female player
                         gp.isMale = false;
                         gp.gameState = gp.playState;
                         gp.playMusic(0);
+                        gp.player.getPlayerImage();
                     }
                     if (gp.ui.commandNum == 2) {
                         gp.ui.titleScreenState = 0;
