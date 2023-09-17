@@ -116,6 +116,7 @@ public class Player extends Entity{
 
             // Check event
             gp.eventHandler.checkEvent();
+            gp.keyboardHandler.enterPressed = false;
 
             // If collision is not detected, move the player
             if (!collisionOn) {
@@ -166,7 +167,6 @@ public class Player extends Entity{
                 gp.npc[i].speak();
             }
         }
-        gp.keyboardHandler.enterPressed = false;
     }
 
 
