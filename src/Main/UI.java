@@ -75,10 +75,27 @@ public class UI {
         int y = gp.tileSize / 2;
         int i = 0;
 
+        // Draw blank hearts
         while(i < gp.player.maxLife / 2) {
             g2.drawImage(heart_empty, x, y, null);
             i++;
-            x += gp.tileSize;
+            x += (int) (gp.tileSize * 0.5);
+        }
+
+        // Reset
+        x = gp.tileSize / 2;
+        y = gp.tileSize / 2;
+        i = 0;
+
+        // Draw current life
+        while(i < gp.player.life) {
+            g2.drawImage(heart_half, x, y, null);
+            i++;
+            if (i < gp.player.life) {
+                g2.drawImage(heart_full, x, y, null);
+            }
+            i++;
+            x += (int) (gp.tileSize * 0.5);
         }
     }
 
