@@ -2,9 +2,9 @@ package Main;
 
 import Entity.Entity;
 import Entity.Player;
+import Entity.NPC_Tigger;
 import object.SuperObject;
 import tile.TileManager;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -46,12 +46,16 @@ public class GamePanel extends JPanel implements Runnable{
     public final int pauseState = 2;
     public final int dialogueState = 3;
 
+    // Title image
+    public NPC_Tigger npcTigger;
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyboardHandler);
         this.setFocusable(true);
+        npcTigger = new NPC_Tigger(this);
     }
 
     public void setupGame() {

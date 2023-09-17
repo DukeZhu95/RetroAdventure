@@ -80,7 +80,7 @@ public class UI {
             // Tigger image
             x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
             y += gp.tileSize;
-            g2.drawImage(gp.player.down2, x, y, gp.tileSize * 2,gp.tileSize * 2,null);
+            g2.drawImage(gp.npcTigger.down2, x, y, gp.tileSize * 2,gp.tileSize * 2,null);
 
             // Menu
             g2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
