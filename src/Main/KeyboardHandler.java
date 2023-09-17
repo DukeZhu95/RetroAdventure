@@ -68,11 +68,13 @@ public class KeyboardHandler implements KeyListener {
                 if (code == KeyEvent.VK_ENTER) {
                     if (gp.ui.commandNum == 0) {
                         // You are a male player
+                        gp.isMale = true;
                         gp.gameState = gp.playState;
                         gp.playMusic(0);
                     }
                     if (gp.ui.commandNum == 1) {
                         // You are a female player
+                        gp.isMale = false;
                         gp.gameState = gp.playState;
                         gp.playMusic(0);
                     }

@@ -49,6 +49,9 @@ public class GamePanel extends JPanel implements Runnable{
     // Title image
     public NPC_Tigger npcTigger;
 
+    // Customizing the gender of the role
+    public boolean isMale = true;
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
