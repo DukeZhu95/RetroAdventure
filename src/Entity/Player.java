@@ -111,8 +111,12 @@ public class Player extends Entity{
             pickUpObject(objIndex);
 
             // Check for collision with NPC
-            int npcIndex = gp.collisionChecker.chekcEntity(this, gp.npc);
+            int npcIndex = gp.collisionChecker.checkEntity(this, gp.npc);
             interactWithNpc(npcIndex);
+
+            // Check for collision with monster
+            int monsterIndex = gp.collisionChecker.checkEntity(this, gp.monster);
+            contactMonster(monsterIndex);
 
             // Check event
             gp.eventHandler.checkEvent();
@@ -152,7 +156,18 @@ public class Player extends Entity{
         } else {
             spriteNum = 2;  // cease movement
         }
+
+        // This needs to be outside of key if statement
+        if(invincible){
+            invincibleCounter++;
+            if(invincibleCounter > 60){
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
+
+
 
     public void pickUpObject(int i) {
         if (i != 999) {
@@ -169,6 +184,15 @@ public class Player extends Entity{
         }
     }
 
+    public void contactMonster(int i) {
+        if (i != 999) {
+            if (!invincible) {
+                life -= 1;
+                invincible = true;
+
+            }
+        }
+    }
 
     public void draw(Graphics2D g2) {
 //        g2.setColor(Color.WHITE);
@@ -215,9 +239,13 @@ public class Player extends Entity{
             }
         }
 
+        if (invincible) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
         g2.drawImage(image, screenX, screenY, null);
 
+        // Reset AlphaComposite
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
     }
-
-
 }
