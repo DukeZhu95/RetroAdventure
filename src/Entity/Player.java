@@ -99,14 +99,14 @@ public class Player extends Entity{
         attackRight2 = setup("/Res/player/Male_attack_right2", gp.tileSize * 2, gp.tileSize);
 
         // Female Player Attack
-        attackUp1 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
-        attackUp2 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
-        attackDown1 = setup("/Res/player/Female_attack_down1", gp.tileSize, gp.tileSize * 2);
-        attackDown2 = setup("/Res/player/Female_attack_down2", gp.tileSize, gp.tileSize * 2);
-        attackLeft1 = setup("/Res/player/Female_attack_left1", gp.tileSize * 2, gp.tileSize);
-        attackLeft2 = setup("/Res/player/Female_attack_left2", gp.tileSize * 2, gp.tileSize);
-        attackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
-        attackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
+//        attackUp1 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
+//        attackUp2 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
+//        attackDown1 = setup("/Res/player/Female_attack_down1", gp.tileSize, gp.tileSize * 2);
+//        attackDown2 = setup("/Res/player/Female_attack_down2", gp.tileSize, gp.tileSize * 2);
+//        attackLeft1 = setup("/Res/player/Female_attack_left1", gp.tileSize * 2, gp.tileSize);
+//        attackLeft2 = setup("/Res/player/Female_attack_left2", gp.tileSize * 2, gp.tileSize);
+//        attackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
+//        attackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
     }
 
     public void update() {
@@ -237,10 +237,9 @@ public class Player extends Entity{
     }
 
     public void draw(Graphics2D g2) {
-//        g2.setColor(Color.WHITE);
-//        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-
         BufferedImage image = null;
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
 
         switch (direction) {
             case "up" -> {
@@ -250,6 +249,7 @@ public class Player extends Entity{
                     if (spriteNum == 3) {image = up3;}
                 }
                 if (attacking) {
+                    tempScreenY = screenY - gp.tileSize;
                     if (spriteNum == 1) {image = attackUp1;}
                     if (spriteNum == 2) {image = attackUp2;}
                 }
@@ -286,6 +286,7 @@ public class Player extends Entity{
                     if (spriteNum == 3) {image = left3;}
                 }
                 if (attacking) {
+                    tempScreenX = screenX - gp.tileSize;
                     if (spriteNum == 1) {image = attackLeft1;}
                     if (spriteNum == 2) {image = attackLeft2;}
                 }
@@ -320,7 +321,7 @@ public class Player extends Entity{
         if (invincible) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
         }
-        g2.drawImage(image, screenX, screenY, null);
+        g2.drawImage(image, tempScreenX, tempScreenY, null);
 
         // Reset AlphaComposite
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
