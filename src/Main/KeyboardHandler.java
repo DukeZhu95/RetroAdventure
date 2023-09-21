@@ -7,7 +7,7 @@ public class KeyboardHandler implements KeyListener {
 
     GamePanel gp;
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, attackPressed;
 
     // Debug
     boolean checkDrawTime = false;
@@ -49,6 +49,10 @@ public class KeyboardHandler implements KeyListener {
                     if (gp.ui.commandNum == 2) {
                         System.exit(0);
                     }
+                }
+                if (code == KeyEvent.VK_J) {
+                    attackPressed = true;
+                    System.out.println("J key is pressed.");
                 }
             }
 
@@ -146,6 +150,9 @@ public class KeyboardHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if (code == KeyEvent.VK_J) {
+            attackPressed = false;
         }
 
     }

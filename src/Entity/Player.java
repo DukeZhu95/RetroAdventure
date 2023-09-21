@@ -127,6 +127,10 @@ public class Player extends Entity{
             if (KeyboardHandler.rightPressed) {
                 direction = "right";
             }
+            if (KeyboardHandler.attackPressed) {
+                attacking = true;
+                System.out.println("Attack is triggered in update method.");
+            }
 
             // Check for collision
             collisionOn = false;
@@ -194,6 +198,7 @@ public class Player extends Entity{
     }
 
     public void attacking() {
+        System.out.println("Attacking method is called.");
         spriteCounter++;
         if (spriteCounter <= 5) {
             spriteNum = 1;
@@ -220,9 +225,9 @@ public class Player extends Entity{
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
             }
-            else {
-                attacking = true;
-            }
+//            else {
+//                attacking = true;
+//            }
         }
     }
 
