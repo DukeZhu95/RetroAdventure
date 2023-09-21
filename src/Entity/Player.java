@@ -40,6 +40,7 @@ public class Player extends Entity{
 
         setDefaultValues();
         getPlayerImage();
+        getPlayerAttackImage();
     }
 
     public void setDefaultValues() {
@@ -57,37 +58,62 @@ public class Player extends Entity{
     public void getPlayerImage() {
         if (gp.isMale) {
             // Male Player
-            up1 = setup("/Res/player/Male_back_left");
-            up2 = setup("/Res/player/Male_back_stand");
-            up3 = setup("/Res/player/Male_back_right");
-            down1 = setup("/Res/player/Male_forward_left");
-            down2 = setup("/Res/player/Male_stand");
-            down3 = setup("/Res/player/Male_forward_right");
-            left1 = setup("/Res/player/Male_left_handforward");
-            left2 = setup("/Res/player/Male_left_stand");
-            left3 = setup("/Res/player/Male_left_handback");
-            right1 = setup("/Res/player/Male_right_handback");
-            right2 = setup("/Res/player/Male_right_stand");
-            right3 = setup("/Res/player/Male_right_handforward");
+            up1 = setup("/Res/player/Male_back_left", gp.tileSize, gp.tileSize);
+            up2 = setup("/Res/player/Male_back_stand", gp.tileSize, gp.tileSize);
+            up3 = setup("/Res/player/Male_back_right", gp.tileSize, gp.tileSize);
+            down1 = setup("/Res/player/Male_forward_left", gp.tileSize, gp.tileSize);
+            down2 = setup("/Res/player/Male_stand", gp.tileSize, gp.tileSize);
+            down3 = setup("/Res/player/Male_forward_right", gp.tileSize, gp.tileSize);
+            left1 = setup("/Res/player/Male_left_handforward", gp.tileSize, gp.tileSize);
+            left2 = setup("/Res/player/Male_left_stand", gp.tileSize, gp.tileSize);
+            left3 = setup("/Res/player/Male_left_handback", gp.tileSize, gp.tileSize);
+            right1 = setup("/Res/player/Male_right_handback", gp.tileSize, gp.tileSize);
+            right2 = setup("/Res/player/Male_right_stand", gp.tileSize, gp.tileSize);
+            right3 = setup("/Res/player/Male_right_handforward", gp.tileSize, gp.tileSize);
         } else {
             // Female Player
-            up1 = setup("/Res/player/Female_back_left");
-            up2 = setup("/Res/player/Female_back_stand");
-            up3 = setup("/Res/player/Female_back_right");
-            down1 = setup("/Res/player/Female_forward_left");
-            down2 = setup("/Res/player/Female_stand");
-            down3 = setup("/Res/player/Female_forward_right");
-            left1 = setup("/Res/player/Female_left_handforward");
-            left2 = setup("/Res/player/Female_left_stand");
-            left3 = setup("/Res/player/Female_left_handback");
-            right1 = setup("/Res/player/Female_right_handback");
-            right2 = setup("/Res/player/Female_right_stand");
-            right3 = setup("/Res/player/Female_right_handforward");
+            up1 = setup("/Res/player/Female_back_left", gp.tileSize, gp.tileSize);
+            up2 = setup("/Res/player/Female_back_stand", gp.tileSize, gp.tileSize);
+            up3 = setup("/Res/player/Female_back_right", gp.tileSize, gp.tileSize);
+            down1 = setup("/Res/player/Female_forward_left", gp.tileSize, gp.tileSize);
+            down2 = setup("/Res/player/Female_stand", gp.tileSize, gp.tileSize);
+            down3 = setup("/Res/player/Female_forward_right", gp.tileSize, gp.tileSize);
+            left1 = setup("/Res/player/Female_left_handforward", gp.tileSize, gp.tileSize);
+            left2 = setup("/Res/player/Female_left_stand", gp.tileSize, gp.tileSize);
+            left3 = setup("/Res/player/Female_left_handback", gp.tileSize, gp.tileSize);
+            right1 = setup("/Res/player/Female_right_handback", gp.tileSize, gp.tileSize);
+            right2 = setup("/Res/player/Female_right_stand", gp.tileSize, gp.tileSize);
+            right3 = setup("/Res/player/Female_right_handforward", gp.tileSize, gp.tileSize);
         }
     }
 
+    public void getPlayerAttackImage() {
+        // Male Player Attack
+        attackUp1 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
+        attackUp2 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
+        attackDown1 = setup("/Res/player/Male_attack_down1", gp.tileSize, gp.tileSize * 2);
+        attackDown2 = setup("/Res/player/Male_attack_down2", gp.tileSize, gp.tileSize * 2);
+        attackLeft1 = setup("/Res/player/Male_attack_left1", gp.tileSize * 2, gp.tileSize);
+        attackLeft2 = setup("/Res/player/Male_attack_left2", gp.tileSize * 2, gp.tileSize);
+        attackRight1 = setup("/Res/player/Male_attack_right1", gp.tileSize * 2, gp.tileSize);
+        attackRight2 = setup("/Res/player/Male_attack_right2", gp.tileSize * 2, gp.tileSize);
+
+        // Female Player Attack
+        attackUp1 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
+        attackUp2 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
+        attackDown1 = setup("/Res/player/Female_attack_down1", gp.tileSize, gp.tileSize * 2);
+        attackDown2 = setup("/Res/player/Female_attack_down2", gp.tileSize, gp.tileSize * 2);
+        attackLeft1 = setup("/Res/player/Female_attack_left1", gp.tileSize * 2, gp.tileSize);
+        attackLeft2 = setup("/Res/player/Female_attack_left2", gp.tileSize * 2, gp.tileSize);
+        attackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
+        attackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
+    }
+
     public void update() {
-        if (KeyboardHandler.upPressed || KeyboardHandler.downPressed || KeyboardHandler.leftPressed || KeyboardHandler.rightPressed) {
+        if (attacking) {
+            attacking();
+        }
+        if (KeyboardHandler.upPressed || KeyboardHandler.downPressed || KeyboardHandler.leftPressed || KeyboardHandler.rightPressed || KeyboardHandler.enterPressed) {
 
             if (KeyboardHandler.upPressed) {
                 direction = "up";
@@ -120,10 +146,9 @@ public class Player extends Entity{
 
             // Check event
             gp.eventHandler.checkEvent();
-            gp.keyboardHandler.enterPressed = false;
 
             // If collision is not detected, move the player
-            if (!collisionOn) {
+            if (!collisionOn && !KeyboardHandler.enterPressed) {
 
                 switch (direction) {
                     case "up" -> worldY -= speed;
@@ -132,6 +157,7 @@ public class Player extends Entity{
                     case "right" -> worldX += speed;
                 }
             }
+            gp.keyboardHandler.enterPressed = false;
 
             // Animate the player
             spriteCounter++;
@@ -167,7 +193,20 @@ public class Player extends Entity{
         }
     }
 
-
+    public void attacking() {
+        spriteCounter++;
+        if (spriteCounter <= 5) {
+            spriteNum = 1;
+        }
+        if (spriteCounter > 5 && spriteCounter <= 25) {
+            spriteNum = 2;
+        }
+        if (spriteCounter > 25) {
+            spriteNum = 1;
+            spriteCounter = 0;
+            attacking = false;
+        }
+    }
 
     public void pickUpObject(int i) {
         if (i != 999) {
@@ -176,10 +215,13 @@ public class Player extends Entity{
     }
 
     public void interactWithNpc(int i) {
-        if (i != 999) {
-            if (gp.keyboardHandler.enterPressed) {
+        if (gp.keyboardHandler.enterPressed) {
+            if (i != 999) {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
+            }
+            else {
+                attacking = true;
             }
         }
     }
@@ -202,6 +244,15 @@ public class Player extends Entity{
 
         switch (direction) {
             case "up" -> {
+                if (!attacking) {
+                    if (spriteNum == 1) {image = up1;}
+                    if (spriteNum == 2) {image = up2;}
+                    if (spriteNum == 3) {image = up3;}
+                }
+                if (attacking) {
+                    if (spriteNum == 1) {image = attackUp1;}
+                    if (spriteNum == 2) {image = attackUp2;}
+                }
                 if (spriteNum == 1) {
                     image = up1;
                 } else if (spriteNum == 2) {
@@ -211,6 +262,15 @@ public class Player extends Entity{
                 }
             }
             case "down" -> {
+                if (!attacking) {
+                    if (spriteNum == 1) {image = down1;}
+                    if (spriteNum == 2) {image = down2;}
+                    if (spriteNum == 3) {image = down3;}
+                }
+                if (attacking) {
+                    if (spriteNum == 1) {image = attackDown1;}
+                    if (spriteNum == 2) {image = attackDown2;}
+                }
                 if (spriteNum == 1) {
                     image = down1;
                 } else if (spriteNum == 2) {
@@ -220,6 +280,15 @@ public class Player extends Entity{
                 }
             }
             case "left" -> {
+                if (!attacking) {
+                    if (spriteNum == 1) {image = left1;}
+                    if (spriteNum == 2) {image = left2;}
+                    if (spriteNum == 3) {image = left3;}
+                }
+                if (attacking) {
+                    if (spriteNum == 1) {image = attackLeft1;}
+                    if (spriteNum == 2) {image = attackLeft2;}
+                }
                 if (spriteNum == 1) {
                     image = left1;
                 } else if (spriteNum == 2) {
@@ -229,6 +298,15 @@ public class Player extends Entity{
                 }
             }
             case "right" -> {
+                if (!attacking) {
+                    if (spriteNum == 1) {image = right1;}
+                    if (spriteNum == 2) {image = right2;}
+                    if (spriteNum == 3) {image = right3;}
+                }
+                if (attacking) {
+                    if (spriteNum == 1) {image = attackRight1;}
+                    if (spriteNum == 2) {image = attackRight2;}
+                }
                 if (spriteNum == 1) {
                     image = right1;
                 } else if (spriteNum == 2) {

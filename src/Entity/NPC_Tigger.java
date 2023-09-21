@@ -18,18 +18,18 @@ public class NPC_Tigger extends Entity {
 
     public void getImage() {
 
-        up1 = setup("/Res/npc/tigger_up_1");
-        up2 = setup("/Res/npc/tigger_up_2");
-        up3 = setup("/Res/npc/tigger_up_3");
-        down1 = setup("/Res/npc/tigger_down_1");
-        down2 = setup("/Res/npc/tigger_down_2");
-        down3 = setup("/Res/npc/tigger_down_3");
-        left1 = setup("/Res/npc/tigger_left_1");
-        left2 = setup("/Res/npc/tigger_left_2");
-        left3 = setup("/Res/npc/tigger_left_3");
-        right1 = setup("/Res/npc/tigger_right_1");
-        right2 = setup("/Res/npc/tigger_right_2");
-        right3 = setup("/Res/npc/tigger_right_3");
+        up1 = setup("/Res/npc/tigger_up_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Res/npc/tigger_up_2", gp.tileSize, gp.tileSize);
+        up3 = setup("/Res/npc/tigger_up_3", gp.tileSize, gp.tileSize);
+        down1 = setup("/Res/npc/tigger_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/Res/npc/tigger_down_2", gp.tileSize, gp.tileSize);
+        down3 = setup("/Res/npc/tigger_down_3", gp.tileSize, gp.tileSize);
+        left1 = setup("/Res/npc/tigger_left_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/Res/npc/tigger_left_2", gp.tileSize, gp.tileSize);
+        left3 = setup("/Res/npc/tigger_left_3", gp.tileSize, gp.tileSize);
+        right1 = setup("/Res/npc/tigger_right_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/Res/npc/tigger_right_2", gp.tileSize, gp.tileSize);
+        right3 = setup("/Res/npc/tigger_right_3", gp.tileSize, gp.tileSize);
     }
 
     public void setDialogue() {
