@@ -50,10 +50,6 @@ public class KeyboardHandler implements KeyListener {
                         System.exit(0);
                     }
                 }
-                if (code == KeyEvent.VK_J) {
-                    attackPressed = true;
-                    System.out.println("J key is pressed.");
-                }
             }
 
             else if (gp.ui.titleScreenState == 1) {
@@ -110,6 +106,10 @@ public class KeyboardHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 enterPressed = true;
+            }
+            if (code == KeyEvent.VK_J) {
+                attackPressed = true;
+                System.out.println("J key is pressed.");
             }
         }
 

@@ -15,6 +15,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     private boolean incrementing = true;
+    private int attackCounter = 0;
 
     public Player (GamePanel gp, KeyboardHandler KeyboardHandler) {
         super(gp);
@@ -90,7 +91,7 @@ public class Player extends Entity{
     public void getPlayerAttackImage() {
         // Male Player Attack
         attackUp1 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
-        attackUp2 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
+        attackUp2 = setup("/Res/player/Male_attack_up2", gp.tileSize, gp.tileSize * 2);
         attackDown1 = setup("/Res/player/Male_attack_down1", gp.tileSize, gp.tileSize * 2);
         attackDown2 = setup("/Res/player/Male_attack_down2", gp.tileSize, gp.tileSize * 2);
         attackLeft1 = setup("/Res/player/Male_attack_left1", gp.tileSize * 2, gp.tileSize);
@@ -110,11 +111,21 @@ public class Player extends Entity{
     }
 
     public void update() {
+        System.out.println("Entering update method.");
+
         if (attacking) {
+            System.out.println("Attacking method is called.");
             attacking();
         }
-        if (KeyboardHandler.upPressed || KeyboardHandler.downPressed || KeyboardHandler.leftPressed || KeyboardHandler.rightPressed || KeyboardHandler.enterPressed) {
 
+        if (KeyboardHandler.attackPressed) {
+            attacking = true;
+            System.out.println("Attack is triggered in update method.");
+            attacking();
+            KeyboardHandler.attackPressed = false;
+            attackCounter = 0;
+
+        } else if (KeyboardHandler.upPressed || KeyboardHandler.downPressed || KeyboardHandler.leftPressed || KeyboardHandler.rightPressed || KeyboardHandler.enterPressed) {
             if (KeyboardHandler.upPressed) {
                 direction = "up";
             }
@@ -126,10 +137,6 @@ public class Player extends Entity{
             }
             if (KeyboardHandler.rightPressed) {
                 direction = "right";
-            }
-            if (KeyboardHandler.attackPressed) {
-                attacking = true;
-                System.out.println("Attack is triggered in update method.");
             }
 
             // Check for collision
@@ -195,20 +202,25 @@ public class Player extends Entity{
                 invincibleCounter = 0;
             }
         }
+        System.out.println("Exiting update method.");
+
     }
 
     public void attacking() {
         System.out.println("Attacking method is called.");
-        spriteCounter++;
-        if (spriteCounter <= 5) {
+        System.out.println("AttackCounter value: " + attackCounter);
+
+
+        attackCounter += 5;
+        if (attackCounter <= 5) {
             spriteNum = 1;
         }
-        if (spriteCounter > 5 && spriteCounter <= 25) {
+        if (attackCounter > 5 && attackCounter <= 25) {
             spriteNum = 2;
         }
-        if (spriteCounter > 25) {
+        if (attackCounter > 25) {
             spriteNum = 1;
-            spriteCounter = 0;
+            attackCounter = 0;
             attacking = false;
         }
     }
@@ -242,85 +254,68 @@ public class Player extends Entity{
     }
 
     public void draw(Graphics2D g2) {
+        System.out.println("Draw method is called.");
+
         BufferedImage image = null;
+
         int tempScreenX = screenX;
         int tempScreenY = screenY;
 
+        System.out.println("Direction: " + direction);
+        System.out.println("Attacking: " + attacking);
+        System.out.println("SpriteNum: " + spriteNum);
+
         switch (direction) {
-            case "up" -> {
-                if (!attacking) {
-                    if (spriteNum == 1) {image = up1;}
-                    if (spriteNum == 2) {image = up2;}
-                    if (spriteNum == 3) {image = up3;}
-                }
+            case "up":
                 if (attacking) {
+                    System.out.println("Drawing attack animation for UP direction.");
                     tempScreenY = screenY - gp.tileSize;
                     if (spriteNum == 1) {image = attackUp1;}
-                    if (spriteNum == 2) {image = attackUp2;}
+                    else if (spriteNum == 2) {image = attackUp2;}
+                } else {
+                    System.out.println("Drawing walk animation for UP direction.");
+                    if (spriteNum == 1) {image = up1;}
+                    else if (spriteNum == 2) {image = up2;}
+                    else if (spriteNum == 3) {image = up3;}
                 }
-                if (spriteNum == 1) {
-                    image = up1;
-                } else if (spriteNum == 2) {
-                    image = up2;
-                } else if (spriteNum == 3) {
-                    image = up3;
-                }
-            }
-            case "down" -> {
-                if (!attacking) {
-                    if (spriteNum == 1) {image = down1;}
-                    if (spriteNum == 2) {image = down2;}
-                    if (spriteNum == 3) {image = down3;}
-                }
+                break;
+            case "down":
                 if (attacking) {
+                    System.out.println("Drawing attack animation for DOWN direction.");
                     if (spriteNum == 1) {image = attackDown1;}
-                    if (spriteNum == 2) {image = attackDown2;}
+                    else if (spriteNum == 2) {image = attackDown2;}
+                } else {
+                    System.out.println("Drawing walk animation for DOWN direction.");
+                    if (spriteNum == 1) {image = down1;}
+                    else if (spriteNum == 2) {image = down2;}
+                    else if (spriteNum == 3) {image = down3;}
                 }
-                if (spriteNum == 1) {
-                    image = down1;
-                } else if (spriteNum == 2) {
-                    image = down2;
-                } else if (spriteNum == 3) {
-                    image = down3;
-                }
-            }
-            case "left" -> {
-                if (!attacking) {
-                    if (spriteNum == 1) {image = left1;}
-                    if (spriteNum == 2) {image = left2;}
-                    if (spriteNum == 3) {image = left3;}
-                }
+                break;
+            case "left":
                 if (attacking) {
+                    System.out.println("Drawing attack animation for LEFT direction.");
                     tempScreenX = screenX - gp.tileSize;
                     if (spriteNum == 1) {image = attackLeft1;}
-                    if (spriteNum == 2) {image = attackLeft2;}
+                    else if (spriteNum == 2) {image = attackLeft2;}
+                } else {
+                    System.out.println("Drawing walk animation for LEFT direction.");
+                    if (spriteNum == 1) {image = left1;}
+                    else if (spriteNum == 2) {image = left2;}
+                    else if (spriteNum == 3) {image = left3;}
                 }
-                if (spriteNum == 1) {
-                    image = left1;
-                } else if (spriteNum == 2) {
-                    image = left2;
-                } else if (spriteNum == 3) {
-                    image = left3;
-                }
-            }
-            case "right" -> {
-                if (!attacking) {
-                    if (spriteNum == 1) {image = right1;}
-                    if (spriteNum == 2) {image = right2;}
-                    if (spriteNum == 3) {image = right3;}
-                }
+                break;
+            case "right":
                 if (attacking) {
+                    System.out.println("Drawing attack animation for RIGHT direction.");
                     if (spriteNum == 1) {image = attackRight1;}
-                    if (spriteNum == 2) {image = attackRight2;}
+                    else if (spriteNum == 2) {image = attackRight2;}
+                } else {
+                    System.out.println("Drawing walk animation for RIGHT direction.");
+                    if (spriteNum == 1) {image = right1;}
+                    else if (spriteNum == 2) {image = right2;}
+                    else if (spriteNum == 3) {image = right3;}
                 }
-                if (spriteNum == 1) {
-                    image = right1;
-                } else if (spriteNum == 2) {
-                    image = right2;
-                } else if (spriteNum == 3) {
-                    image = right3;
-                }
-            }
+                break;
         }
 
         if (invincible) {
@@ -330,6 +325,7 @@ public class Player extends Entity{
 
         // Reset AlphaComposite
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
     }
+
+
 }
