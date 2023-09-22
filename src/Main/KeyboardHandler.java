@@ -109,7 +109,6 @@ public class KeyboardHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_J) {
                 attackPressed = true;
-                System.out.println("J key is pressed.");
             }
         }
 

@@ -78,12 +78,13 @@ public class Entity {
         if (this.type == 2 && contactPlayer) {
             if (!gp.player.invincible) {
                 // We can give damage
+                gp.playSE(6);
                 gp.player.life -= 1;
                 gp.player.invincible = true;
             }
         }
 
-        // If collision is not detected, move the NPC
+        // If collision is not detected, move the player
         if (!collisionOn) {
 
             switch (direction) {
@@ -162,7 +163,7 @@ public class Entity {
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
             }
             if (dying) {
-                dyingAnimation();
+                dyingAnimation(g2);
             }
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
