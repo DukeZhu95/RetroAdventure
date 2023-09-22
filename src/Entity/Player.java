@@ -120,6 +120,7 @@ public class Player extends Entity{
 
         if (KeyboardHandler.attackPressed) {
             attacking = true;
+            gp.playSE(7);
             attacking();
             KeyboardHandler.attackPressed = false;
             attackCounter = 0;
@@ -170,7 +171,7 @@ public class Player extends Entity{
             gp.keyboardHandler.enterPressed = false;
 
             // Animate the player
-            spriteCounter++;
+            spriteCounter ++;
             if (spriteCounter > 15) {
                 if (incrementing) {
                     if (spriteNum == 1) {
@@ -204,11 +205,11 @@ public class Player extends Entity{
     }
 
     public void attacking() {
-        attackCounter ++;
-        if (attackCounter <= 20) {
+        attackCounter += 3;
+        if (attackCounter <= 15) {
             spriteNum = 1;
         }
-        if (attackCounter > 20 && attackCounter <= 25) {
+        if (attackCounter > 15 && attackCounter <= 25) {
             spriteNum = 2;
 
             // Save the current worldX and worldY, and solidArea width and height
@@ -258,10 +259,6 @@ public class Player extends Entity{
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
             }
-            else {
-                gp.playSE(7);
-                attacking = true;
-            }
         }
     }
 
@@ -282,6 +279,7 @@ public class Player extends Entity{
                 gp.playSE(5);
                 gp.monster[i].life -= 1;
                 gp.monster[i].invincible = true;
+                gp.monster[i].damageReaction();
             }
             if (gp.monster[i].life <= 0) {
                 gp.monster[i].dying = true;
