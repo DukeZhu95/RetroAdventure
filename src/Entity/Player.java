@@ -204,11 +204,11 @@ public class Player extends Entity{
     }
 
     public void attacking() {
-        attackCounter += 5;
-        if (attackCounter <= 5) {
+        attackCounter ++;
+        if (attackCounter <= 20) {
             spriteNum = 1;
         }
-        if (attackCounter > 5 && attackCounter <= 25) {
+        if (attackCounter > 20 && attackCounter <= 25) {
             spriteNum = 2;
 
             // Save the current worldX and worldY, and solidArea width and height
