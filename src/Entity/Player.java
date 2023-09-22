@@ -32,6 +32,9 @@ public class Player extends Entity{
         solidArea.width = 64;
         solidArea.height = 60;
 
+        attackArea.width = 70;
+        attackArea.height = 70;
+
         // Modify the solid area to make it smaller
         solidArea.x += 10;
         solidArea.y += 10;
@@ -111,16 +114,12 @@ public class Player extends Entity{
     }
 
     public void update() {
-        System.out.println("Entering update method.");
-
         if (attacking) {
-            System.out.println("Attacking method is called.");
             attacking();
         }
 
         if (KeyboardHandler.attackPressed) {
             attacking = true;
-            System.out.println("Attack is triggered in update method.");
             attacking();
             KeyboardHandler.attackPressed = false;
             attackCounter = 0;
@@ -202,21 +201,43 @@ public class Player extends Entity{
                 invincibleCounter = 0;
             }
         }
-        System.out.println("Exiting update method.");
-
     }
 
     public void attacking() {
-        System.out.println("Attacking method is called.");
-        System.out.println("AttackCounter value: " + attackCounter);
-
-
         attackCounter += 5;
         if (attackCounter <= 5) {
             spriteNum = 1;
         }
         if (attackCounter > 5 && attackCounter <= 25) {
             spriteNum = 2;
+
+            // Save the current worldX and worldY, and solidArea width and height
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int soildAreaWidth = solidArea.width;
+            int soildAreaHeight = solidArea.height;
+
+            // Adjust player`s worldX&Y for the attackArea
+            switch (direction) {
+                case "up": worldY -= attackArea.height; break;
+                case "down": worldY += attackArea.height; break;
+                case "left": worldX -= attackArea.width; break;
+                case "right": worldX += attackArea.width; break;
+            }
+
+            // AttackArea becomes solidArea
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            // Check for collision with monster with worldX and worldY, and solidArea
+            int monsterIndex = gp.collisionChecker.checkEntity(this, gp.monster);
+            damageMonster(monsterIndex);
+
+            // After checking, restore the player`s worldX&Y and solidArea
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.width = soildAreaWidth;
+            solidArea.height = soildAreaHeight;
         }
         if (attackCounter > 25) {
             spriteNum = 1;
@@ -253,27 +274,31 @@ public class Player extends Entity{
         }
     }
 
-    public void draw(Graphics2D g2) {
-        System.out.println("Draw method is called.");
+    public void damageMonster(int i) {
+        if (i != 999) {
+            if (!gp.monster[i].invincible) {
+                gp.monster[i].life -= 1;
+                gp.monster[i].invincible = true;
+            }
+            if (gp.monster[i].life <= 0) {
+                gp.monster[i] = null;
+            }
+        }
+    }
 
+    public void draw(Graphics2D g2) {
         BufferedImage image = null;
 
         int tempScreenX = screenX;
         int tempScreenY = screenY;
 
-        System.out.println("Direction: " + direction);
-        System.out.println("Attacking: " + attacking);
-        System.out.println("SpriteNum: " + spriteNum);
-
         switch (direction) {
             case "up":
                 if (attacking) {
-                    System.out.println("Drawing attack animation for UP direction.");
                     tempScreenY = screenY - gp.tileSize;
                     if (spriteNum == 1) {image = attackUp1;}
                     else if (spriteNum == 2) {image = attackUp2;}
                 } else {
-                    System.out.println("Drawing walk animation for UP direction.");
                     if (spriteNum == 1) {image = up1;}
                     else if (spriteNum == 2) {image = up2;}
                     else if (spriteNum == 3) {image = up3;}
@@ -281,11 +306,9 @@ public class Player extends Entity{
                 break;
             case "down":
                 if (attacking) {
-                    System.out.println("Drawing attack animation for DOWN direction.");
                     if (spriteNum == 1) {image = attackDown1;}
                     else if (spriteNum == 2) {image = attackDown2;}
                 } else {
-                    System.out.println("Drawing walk animation for DOWN direction.");
                     if (spriteNum == 1) {image = down1;}
                     else if (spriteNum == 2) {image = down2;}
                     else if (spriteNum == 3) {image = down3;}
@@ -293,12 +316,10 @@ public class Player extends Entity{
                 break;
             case "left":
                 if (attacking) {
-                    System.out.println("Drawing attack animation for LEFT direction.");
                     tempScreenX = screenX - gp.tileSize;
                     if (spriteNum == 1) {image = attackLeft1;}
                     else if (spriteNum == 2) {image = attackLeft2;}
                 } else {
-                    System.out.println("Drawing walk animation for LEFT direction.");
                     if (spriteNum == 1) {image = left1;}
                     else if (spriteNum == 2) {image = left2;}
                     else if (spriteNum == 3) {image = left3;}
@@ -306,11 +327,9 @@ public class Player extends Entity{
                 break;
             case "right":
                 if (attacking) {
-                    System.out.println("Drawing attack animation for RIGHT direction.");
                     if (spriteNum == 1) {image = attackRight1;}
                     else if (spriteNum == 2) {image = attackRight2;}
                 } else {
-                    System.out.println("Drawing walk animation for RIGHT direction.");
                     if (spriteNum == 1) {image = right1;}
                     else if (spriteNum == 2) {image = right2;}
                     else if (spriteNum == 3) {image = right3;}
