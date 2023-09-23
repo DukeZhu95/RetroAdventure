@@ -48,7 +48,7 @@ public class Entity {
     public int life;
     public int level;
     public int strength;
-    public int dexiterity;
+    public int dexterity;
     public int attack;
     public int defense;
     public int exp;

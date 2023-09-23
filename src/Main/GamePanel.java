@@ -68,6 +68,12 @@ public class GamePanel extends JPanel implements Runnable{
         npcTigger = new NPC_Tigger(this);
     }
 
+    public void setGameState(int newState) {
+//        System.out.println("Setting gameState from " + this.gameState + " to " + newState);
+        this.gameState = newState;
+    }
+
+
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
@@ -75,6 +81,8 @@ public class GamePanel extends JPanel implements Runnable{
 //        playMusic(0);
         gameState = titleState;
     }
+
+
 
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -145,6 +153,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void paintComponent(Graphics g) {
+//        System.out.println("Painting... Current gameState: " + gameState);
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D) g;
 

@@ -61,7 +61,7 @@ public class Player extends Entity{
         maxLife = 6;
         life = maxLife;
         strength = 1;
-        dexiterity = 1;
+        dexterity = 1;
         exp = 0;
         nextLevelExp = 10;
         coin = 0;
@@ -76,7 +76,7 @@ public class Player extends Entity{
     }
 
     public int getDefense() {
-        return defense = dexiterity + currentShield.defenseValue;
+        return defense = dexterity + currentShield.defenseValue;
     }
 
     public void getPlayerImage() {
