@@ -46,6 +46,7 @@ public class KeyboardHandler implements KeyListener {
 
         // Character state
         if (gp.gameState == gp.characterState) {
+            System.out.println("Character state start");
            characterState(code);
         }
 
@@ -130,8 +131,8 @@ public class KeyboardHandler implements KeyListener {
             gp.gameState = gp.pauseState;
         }
         if (code == KeyEvent.VK_C) {
-//            System.out.println("C pressed");
             gp.gameState = gp.characterState;
+            gp.repaint();
         }
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
@@ -160,7 +161,6 @@ public class KeyboardHandler implements KeyListener {
 
     public void characterState(int code) {
         if (code == KeyEvent.VK_C) {
-//            System.out.println("C pressed again");
             gp.gameState = gp.playState;
         }
     }

@@ -220,12 +220,44 @@ public class UI {
         }
     }
     public void drawCharacterScreen() {
+
         // Create a frame
         final int frameX = gp.tileSize * 2;
         final int frameY = gp.tileSize;
         final int frameWidth = gp.tileSize * 5;
         final int frameHeight = gp.tileSize * 10;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        // Text
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32f));
+        int textX = frameX + 20;
+        int textY = frameY + gp.tileSize;
+        final int lineHeight = 32;
+
+        // Names
+        g2.drawString("Lv.", textX, textY);
+        textY += lineHeight;
+        g2.drawString("HP: ", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Strength: ", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Dexterity: ", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Attack: ", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Defense: ", textX, textY);
+        textY += lineHeight;
+        g2.drawString("EXP: ", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Next Lv.", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Gold: ", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Weapon: ", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Armor: ", textX, textY);
+        textY += lineHeight;
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
