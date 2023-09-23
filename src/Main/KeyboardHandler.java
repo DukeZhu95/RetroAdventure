@@ -46,7 +46,7 @@ public class KeyboardHandler implements KeyListener {
 
         // Character state
         if (gp.gameState == gp.characterState) {
-            System.out.println("Character state start");
+            System.out.println("Character state activated!"); // 添加这个来验证
            characterState(code);
         }
 
@@ -132,7 +132,7 @@ public class KeyboardHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_C) {
             gp.gameState = gp.characterState;
-            gp.repaint();
+            System.out.println("Character state activated in playState!"); // 添加这个来验证
         }
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;

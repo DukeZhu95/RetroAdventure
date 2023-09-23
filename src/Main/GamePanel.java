@@ -153,7 +153,8 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void paintComponent(Graphics g) {
-//        System.out.println("Painting... Current gameState: " + gameState);
+        System.out.println("Start of paintComponent. gameState: " + gameState);
+
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D) g;
 
@@ -167,6 +168,7 @@ public class GamePanel extends JPanel implements Runnable{
         if (gameState == titleState) {
             ui.draw(g2);
         }
+
         // Others
         else {
             // Tile
@@ -209,7 +211,14 @@ public class GamePanel extends JPanel implements Runnable{
             System.out.println("Draw Time: " + passed);
         }
 
+        // Character screen
+        if (gameState == characterState) {
+            ui.drawCharacterScreen();
+        }
+
         g2.dispose();
+
+        System.out.println("End of paintComponent. gameState: " + gameState);
     }
 
     public void playMusic(int i) {

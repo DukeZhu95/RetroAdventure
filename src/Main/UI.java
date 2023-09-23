@@ -221,7 +221,7 @@ public class UI {
         }
     }
     public void drawCharacterScreen() {
-
+        System.out.println("Drawing character screen..."); // 添加这个来验证
         // Create a frame
         final int frameX = gp.tileSize * 2;
         final int frameY = gp.tileSize;
