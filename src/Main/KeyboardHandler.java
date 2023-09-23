@@ -12,6 +12,10 @@ public class KeyboardHandler implements KeyListener {
     // Debug
     boolean checkDrawTime = false;
 
+    // Boolean variable for key pressed
+    private boolean cPressed = false;
+    private boolean spacePressed = false;
+
     public KeyboardHandler(GamePanel gp) {
         this.gp = gp;
     }
@@ -24,6 +28,7 @@ public class KeyboardHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+
         // Title state
         if (gp.gameState == gp.titleState) {
             titleState(code);
@@ -32,11 +37,29 @@ public class KeyboardHandler implements KeyListener {
         // Play state
         if (gp.gameState == gp.playState) {
             playState(code);
+
+            // Handle 'C' key press for character state
+            if (code == KeyEvent.VK_C && !cPressed) {
+                cPressed = true;
+                gp.gameState = gp.characterState;
+            }
+
+            // Handle 'Space' key press for pause state
+            if (code == KeyEvent.VK_SPACE && !spacePressed) {
+                spacePressed = true;
+                gp.gameState = gp.pauseState;
+            }
         }
 
         // Pause state
         if (gp.gameState == gp.pauseState) {
             pauseState(code);
+
+            // Handle 'Space' key press to return to play state
+            if (code == KeyEvent.VK_SPACE && !spacePressed) {
+                spacePressed = true;
+                gp.gameState = gp.playState;
+            }
         }
 
         // Dialogue state
@@ -46,11 +69,17 @@ public class KeyboardHandler implements KeyListener {
 
         // Character state
         if (gp.gameState == gp.characterState) {
-            System.out.println("Character state activated!"); // 添加这个来验证
-           characterState(code);
-        }
+            characterState(code);
 
+            // Handle 'C' key press to return to play state
+            if (code == KeyEvent.VK_C && !cPressed) {
+                cPressed = true;
+                gp.gameState = gp.playState;
+            }
+        }
     }
+
+
 
     public void titleState(int code) {
         if (gp.ui.titleScreenState == 0) {
@@ -132,7 +161,6 @@ public class KeyboardHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_C) {
             gp.gameState = gp.characterState;
-            System.out.println("Character state activated in playState!"); // 添加这个来验证
         }
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
@@ -148,9 +176,9 @@ public class KeyboardHandler implements KeyListener {
     }
 
     public void pauseState(int code) {
-        if (code == KeyEvent.VK_SPACE) {
-            gp.gameState = gp.playState;
-        }
+//        if (code == KeyEvent.VK_SPACE) {
+//            gp.gameState = gp.playState;
+//        }
     }
 
     public void dialogueState(int code) {
@@ -160,9 +188,9 @@ public class KeyboardHandler implements KeyListener {
     }
 
     public void characterState(int code) {
-        if (code == KeyEvent.VK_C) {
-            gp.gameState = gp.playState;
-        }
+//        if (code == KeyEvent.VK_C) {
+//            gp.gameState = gp.playState;
+//        }
     }
 
     @Override
@@ -183,6 +211,12 @@ public class KeyboardHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_J) {
             attackPressed = false;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            spacePressed = false;
+        }
+        if (code == KeyEvent.VK_C) {
+            cPressed = false;
         }
 
     }

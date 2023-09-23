@@ -153,7 +153,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void paintComponent(Graphics g) {
-        System.out.println("Start of paintComponent. gameState: " + gameState);
+//        System.out.println("Start of paintComponent. gameState: " + gameState);
 
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D) g;
@@ -218,7 +218,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         g2.dispose();
 
-        System.out.println("End of paintComponent. gameState: " + gameState);
+//        System.out.println("End of paintComponent. gameState: " + gameState);
     }
 
     public void playMusic(int i) {

@@ -221,7 +221,6 @@ public class UI {
         }
     }
     public void drawCharacterScreen() {
-        System.out.println("Drawing character screen..."); // 添加这个来验证
         // Create a frame
         final int frameX = gp.tileSize * 2;
         final int frameY = gp.tileSize;
@@ -254,9 +253,9 @@ public class UI {
         g2.drawString("Next Lv.", textX, textY);
         textY += lineHeight;
         g2.drawString("Gold: ", textX, textY);
-        textY += lineHeight + 20;
+        textY += lineHeight + 50;
         g2.drawString("Weapon: ", textX, textY);
-        textY += lineHeight + 15;
+        textY += lineHeight + 40;
         g2.drawString("Armor: ", textX, textY);
         textY += lineHeight;
 
