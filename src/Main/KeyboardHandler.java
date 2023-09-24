@@ -76,6 +76,22 @@ public class KeyboardHandler implements KeyListener {
                 cPressed = true;
                 gp.gameState = gp.playState;
             }
+            if (code == KeyEvent.VK_W) {
+                gp.ui.slotRow--;
+                gp.playSE(9);
+            }
+            if (code == KeyEvent.VK_A) {
+                gp.ui.slotColumn--;
+                gp.playSE(9);
+            }
+            if (code == KeyEvent.VK_S) {
+                gp.ui.slotRow++;
+                gp.playSE(9);
+            }
+            if (code == KeyEvent.VK_D) {
+                gp.ui.slotColumn++;
+                gp.playSE(9);
+            }
         }
     }
 

@@ -115,24 +115,24 @@ public class Player extends Entity{
     public void getPlayerAttackImage() {
         if (gp.isMale) {
             // Male Player Attack
-            attackUp1 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/Res/player/Male_attack_up2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/Res/player/Male_attack_down1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/Res/player/Male_attack_down2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/Res/player/Male_attack_left1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/Res/player/Male_attack_left2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/Res/player/Male_attack_right1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/Res/player/Male_attack_right2", gp.tileSize * 2, gp.tileSize);
+            MaleAttackUp1 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
+            MaleAttackUp2 = setup("/Res/player/Male_attack_up2", gp.tileSize, gp.tileSize * 2);
+            MaleAttackDown1 = setup("/Res/player/Male_attack_down1", gp.tileSize, gp.tileSize * 2);
+            MaleAttackDown2 = setup("/Res/player/Male_attack_down2", gp.tileSize, gp.tileSize * 2);
+            MaleAttackLeft1 = setup("/Res/player/Male_attack_left1", gp.tileSize * 2, gp.tileSize);
+            MaleAttackLeft2 = setup("/Res/player/Male_attack_left2", gp.tileSize * 2, gp.tileSize);
+            MaleAttackRight1 = setup("/Res/player/Male_attack_right1", gp.tileSize * 2, gp.tileSize);
+            MaleAttackRight2 = setup("/Res/player/Male_attack_right2", gp.tileSize * 2, gp.tileSize);
         } else {
             // Female Player Attack
-            attackUp1 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/Res/player/Female_attack_up2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/Res/player/Female_attack_down1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/Res/player/Female_attack_down2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/Res/player/Female_attack_left1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/Res/player/Female_attack_left2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
+            FemaleAttackUp1 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
+            FemaleAttackUp2 = setup("/Res/player/Female_attack_up2", gp.tileSize, gp.tileSize * 2);
+            FemaleAttackDown1 = setup("/Res/player/Female_attack_down1", gp.tileSize, gp.tileSize * 2);
+            FemaleAttackDown2 = setup("/Res/player/Female_attack_down2", gp.tileSize, gp.tileSize * 2);
+            FemaleAttackLeft1 = setup("/Res/player/Female_attack_left1", gp.tileSize * 2, gp.tileSize);
+            FemaleAttackLeft2 = setup("/Res/player/Female_attack_left2", gp.tileSize * 2, gp.tileSize);
+            FemaleAttackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
+            FemaleAttackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
         }
     }
 
@@ -217,7 +217,7 @@ public class Player extends Entity{
             spriteNum = 2;  // cease movement
         }
 
-        // This needs to be outside of key if statement
+        // This needs to be outside key if statement
         if(invincible){
             invincibleCounter++;
             if(invincibleCounter > 60){
@@ -280,6 +280,42 @@ public class Player extends Entity{
             attacking = false;
             hasDamagedMonster = false;
         }
+
+        // Gender-specific attack animation
+        switch (direction) {
+            case "up":
+                if (gp.isMale) {
+                    image = spriteNum == 1 ? MaleAttackUp1 : MaleAttackUp2;
+                } else {
+                    image = spriteNum == 1 ? FemaleAttackUp1 : FemaleAttackUp2;
+                }
+                break;
+
+            case "down":
+                if (gp.isMale) {
+                    image = spriteNum == 1 ? MaleAttackDown1 : MaleAttackDown2;
+                } else {
+                    image = spriteNum == 1 ? FemaleAttackDown1 : FemaleAttackDown2;
+                }
+                break;
+
+            case "left":
+                if (gp.isMale) {
+                    image = spriteNum == 1 ? MaleAttackLeft1 : MaleAttackLeft2;
+                } else {
+                    image = spriteNum == 1 ? FemaleAttackLeft1 : FemaleAttackLeft2;
+                }
+                break;
+
+            case "right":
+                if (gp.isMale) {
+                    image = spriteNum == 1 ? MaleAttackRight1 : MaleAttackRight2;
+                } else {
+                    image = spriteNum == 1 ? FemaleAttackRight1 : FemaleAttackRight2;
+                }
+                break;
+        }
+
     }
 
     public void pickUpObject(int i) {
@@ -368,8 +404,7 @@ public class Player extends Entity{
             case "up":
                 if (attacking) {
                     tempScreenY = screenY - gp.tileSize;
-                    if (spriteNum == 1) {image = attackUp1;}
-                    else if (spriteNum == 2) {image = attackUp2;}
+                    image = spriteNum == 1 ? (gp.isMale ? MaleAttackUp1 : FemaleAttackUp1) : (gp.isMale ? MaleAttackUp2 : FemaleAttackUp2);
                 } else {
                     if (spriteNum == 1) {image = up1;}
                     else if (spriteNum == 2) {image = up2;}
@@ -378,8 +413,7 @@ public class Player extends Entity{
                 break;
             case "down":
                 if (attacking) {
-                    if (spriteNum == 1) {image = attackDown1;}
-                    else if (spriteNum == 2) {image = attackDown2;}
+                    image = spriteNum == 1 ? (gp.isMale ? MaleAttackDown1 : FemaleAttackDown1) : (gp.isMale ? MaleAttackDown2 : FemaleAttackDown2);
                 } else {
                     if (spriteNum == 1) {image = down1;}
                     else if (spriteNum == 2) {image = down2;}
@@ -389,8 +423,7 @@ public class Player extends Entity{
             case "left":
                 if (attacking) {
                     tempScreenX = screenX - gp.tileSize;
-                    if (spriteNum == 1) {image = attackLeft1;}
-                    else if (spriteNum == 2) {image = attackLeft2;}
+                    image = spriteNum == 1 ? (gp.isMale ? MaleAttackLeft1 : FemaleAttackLeft1) : (gp.isMale ? MaleAttackLeft2 : FemaleAttackLeft2);
                 } else {
                     if (spriteNum == 1) {image = left1;}
                     else if (spriteNum == 2) {image = left2;}
@@ -399,8 +432,7 @@ public class Player extends Entity{
                 break;
             case "right":
                 if (attacking) {
-                    if (spriteNum == 1) {image = attackRight1;}
-                    else if (spriteNum == 2) {image = attackRight2;}
+                    image = spriteNum == 1 ? (gp.isMale ? MaleAttackRight1 : FemaleAttackRight1) : (gp.isMale ? MaleAttackRight2 : FemaleAttackRight2);
                 } else {
                     if (spriteNum == 1) {image = right1;}
                     else if (spriteNum == 2) {image = right2;}
@@ -417,6 +449,5 @@ public class Player extends Entity{
         // Reset AlphaComposite
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
-
 
 }
