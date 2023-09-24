@@ -77,20 +77,28 @@ public class KeyboardHandler implements KeyListener {
                 gp.gameState = gp.playState;
             }
             if (code == KeyEvent.VK_W) {
-                gp.ui.slotRow--;
-                gp.playSE(9);
+                if (gp.ui.slotRow != 0) {
+                    gp.ui.slotRow--;
+                    gp.playSE(9);
+                }
             }
             if (code == KeyEvent.VK_A) {
-                gp.ui.slotColumn--;
-                gp.playSE(9);
+                if (gp.ui.slotColumn != 0) {
+                    gp.ui.slotColumn--;
+                    gp.playSE(9);
+                }
             }
             if (code == KeyEvent.VK_S) {
-                gp.ui.slotRow++;
-                gp.playSE(9);
+                if (gp.ui.slotRow != 3) {
+                    gp.ui.slotRow++;
+                    gp.playSE(9);
+                }
             }
             if (code == KeyEvent.VK_D) {
-                gp.ui.slotColumn++;
-                gp.playSE(9);
+                if (gp.ui.slotColumn != 4) {
+                    gp.ui.slotColumn++;
+                    gp.playSE(9);
+                }
             }
         }
     }

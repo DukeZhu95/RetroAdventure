@@ -3,6 +3,7 @@ package Entity;
 import Main.GamePanel;
 import Main.KeyboardHandler;
 import Main.UtilityTool;
+import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
@@ -10,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Player extends Entity{
@@ -19,6 +21,8 @@ public class Player extends Entity{
     private boolean incrementing = true;
     private int attackCounter = 0;
     boolean hasDamagedMonster = false;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
 
     public Player (GamePanel gp, KeyboardHandler KeyboardHandler) {
         super(gp);
@@ -44,10 +48,10 @@ public class Player extends Entity{
         solidArea.width -= 5;
         solidArea.height -= 10;
 
-
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
 
     public void setDefaultValues() {
@@ -70,6 +74,12 @@ public class Player extends Entity{
         currentShield = new OBJ_Shield_Wood(gp);
         attack = getAttack();
         defense = getDefense();
+    }
+
+    public void setItems() {
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new OBJ_Key(gp));
     }
 
     public int getAttack() {
@@ -228,6 +238,7 @@ public class Player extends Entity{
     }
 
     public void attacking() {
+//        System.out.println("Male is attacking, spriteNum: " + spriteNum);
         attackCounter += 3;
         if (attackCounter <= 15) {
             spriteNum = 1;

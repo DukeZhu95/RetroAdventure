@@ -9,5 +9,6 @@ public class OBJ_Key extends Entity {
         super(gp);
         name = "Key";
         down1 = setup("/Res/objects/key", gp.tileSize, gp.tileSize);
+        description = "[" + name + "]\n" + "Just find a door, please...";
     }
 }
