@@ -2,17 +2,13 @@ package Entity;
 
 import Main.GamePanel;
 import Main.KeyboardHandler;
-import Main.UtilityTool;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
-import object.OBJ_Sword_Normal;
+import object.OBJ_Sword_Wood;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Player extends Entity{
     KeyboardHandler KeyboardHandler;
@@ -39,8 +35,8 @@ public class Player extends Entity{
         solidArea.width = 64;
         solidArea.height = 60;
 
-        attackArea.width = 70;
-        attackArea.height = 70;
+//        attackArea.width = 70;
+//        attackArea.height = 70;
 
         // Modify the solid area to make it smaller
         solidArea.x += 10;
@@ -70,7 +66,7 @@ public class Player extends Entity{
         exp = 0;
         nextLevelExp = 10;
         coin = 0;
-        currentWeapon = new OBJ_Sword_Normal(gp);
+        currentWeapon = new OBJ_Sword_Wood(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         attack = getAttack();
         defense = getDefense();
@@ -83,6 +79,7 @@ public class Player extends Entity{
     }
 
     public int getAttack() {
+        attackArea = currentWeapon.attackArea;
         return attack = strength + currentWeapon.attackValue;
     }
 
@@ -331,7 +328,16 @@ public class Player extends Entity{
 
     public void pickUpObject(int i) {
         if (i != 999) {
-
+            String text;
+            if (inventory.size() != maxInventorySize) {
+                inventory.add(gp.obj[i]);
+                gp.playSE(1);
+                text = "You picked up a " + gp.obj[i].name + "!";
+            } else {
+                text = "Your inventory is full!";
+            }
+            gp.ui.addMessage(text);
+            gp.obj[i] = null;
         }
     }
 
@@ -402,6 +408,25 @@ public class Player extends Entity{
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You are Lv. " + level + " now!\n" + "You became stronger!";
+        }
+    }
+
+    public void selectItem() {
+        int itemIndex = gp.ui.getItemIndexOnSlot();
+        if (itemIndex < inventory.size()) {
+            Entity selectedItem = inventory.get(itemIndex);
+            if (selectedItem.type == type_sword || selectedItem.type == type_axe) {
+                currentWeapon = selectedItem;
+                attack = getAttack();
+            }
+            if (selectedItem.type == type_shield) {
+                currentShield = selectedItem;
+                defense = getDefense();
+            }
+            if (selectedItem.type == type_consumable) {
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
+            }
         }
     }
 

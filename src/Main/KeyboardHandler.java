@@ -100,6 +100,9 @@ public class KeyboardHandler implements KeyListener {
                     gp.playSE(9);
                 }
             }
+            if (code == KeyEvent.VK_ENTER) {
+                gp.player.selectItem();
+            }
         }
     }
 
