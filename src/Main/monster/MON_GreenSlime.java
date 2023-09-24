@@ -2,6 +2,8 @@ package Main.monster;
 
 import Entity.Entity;
 import Main.GamePanel;
+import object.OBJ_Coin;
+import object.OBJ_Heart;
 
 import java.util.Random;
 
@@ -93,6 +95,19 @@ public class MON_GreenSlime extends Entity {
             } else {
                 direction = "down";
             }
+        }
+    }
+
+    public void checkDrop() {
+        // Cast a die
+        int i = new Random().nextInt(100) + 1;
+
+        // Set the drop item
+        if (i < 75) {
+            dropItem(new OBJ_Coin(gp));
+        }
+        if (i >= 75 && i < 100) {
+            dropItem(new OBJ_Heart(gp));
         }
     }
 }

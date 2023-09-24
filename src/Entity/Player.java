@@ -232,6 +232,9 @@ public class Player extends Entity{
                 invincibleCounter = 0;
             }
         }
+        if (life > maxLife) {
+            life = maxLife;
+        }
     }
 
     public void attacking() {
@@ -328,16 +331,24 @@ public class Player extends Entity{
 
     public void pickUpObject(int i) {
         if (i != 999) {
-            String text;
-            if (inventory.size() != maxInventorySize) {
-                inventory.add(gp.obj[i]);
-                gp.playSE(1);
-                text = "You picked up a " + gp.obj[i].name + "!";
-            } else {
-                text = "Your inventory is full!";
+            // Pickup only items
+            if (gp.obj[i].type == type_pickupOnly) {
+                gp.obj[i].use(this);
+                gp.obj[i] = null;
             }
-            gp.ui.addMessage(text);
-            gp.obj[i] = null;
+            // Inventory items
+            else {
+                String text;
+                if (inventory.size() != maxInventorySize) {
+                    inventory.add(gp.obj[i]);
+                    gp.playSE(1);
+                    text = "You picked up a " + gp.obj[i].name + "!";
+                } else {
+                    text = "Your inventory is full!";
+                }
+                gp.ui.addMessage(text);
+                gp.obj[i] = null;
+            }
         }
     }
 
@@ -352,17 +363,15 @@ public class Player extends Entity{
 
     public void contactMonster(int i) {
         if (i != 999) {
-            if (!invincible) {
+            if (!invincible && !gp.monster[i].dying) {
                 gp.playSE(6);
 
                 int damage = gp.monster[i].attack - defense;
                 if (damage < 0) {
                     damage = 0;
                 }
-
                 life -= damage;
                 invincible = true;
-
             }
         }
     }
