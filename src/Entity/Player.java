@@ -113,25 +113,27 @@ public class Player extends Entity{
     }
 
     public void getPlayerAttackImage() {
-        // Male Player Attack
-        attackUp1 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
-        attackUp2 = setup("/Res/player/Male_attack_up2", gp.tileSize, gp.tileSize * 2);
-        attackDown1 = setup("/Res/player/Male_attack_down1", gp.tileSize, gp.tileSize * 2);
-        attackDown2 = setup("/Res/player/Male_attack_down2", gp.tileSize, gp.tileSize * 2);
-        attackLeft1 = setup("/Res/player/Male_attack_left1", gp.tileSize * 2, gp.tileSize);
-        attackLeft2 = setup("/Res/player/Male_attack_left2", gp.tileSize * 2, gp.tileSize);
-        attackRight1 = setup("/Res/player/Male_attack_right1", gp.tileSize * 2, gp.tileSize);
-        attackRight2 = setup("/Res/player/Male_attack_right2", gp.tileSize * 2, gp.tileSize);
-
-        // Female Player Attack
-//        attackUp1 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
-//        attackUp2 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
-//        attackDown1 = setup("/Res/player/Female_attack_down1", gp.tileSize, gp.tileSize * 2);
-//        attackDown2 = setup("/Res/player/Female_attack_down2", gp.tileSize, gp.tileSize * 2);
-//        attackLeft1 = setup("/Res/player/Female_attack_left1", gp.tileSize * 2, gp.tileSize);
-//        attackLeft2 = setup("/Res/player/Female_attack_left2", gp.tileSize * 2, gp.tileSize);
-//        attackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
-//        attackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
+        if (gp.isMale) {
+            // Male Player Attack
+            attackUp1 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setup("/Res/player/Male_attack_up2", gp.tileSize, gp.tileSize * 2);
+            attackDown1 = setup("/Res/player/Male_attack_down1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setup("/Res/player/Male_attack_down2", gp.tileSize, gp.tileSize * 2);
+            attackLeft1 = setup("/Res/player/Male_attack_left1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setup("/Res/player/Male_attack_left2", gp.tileSize * 2, gp.tileSize);
+            attackRight1 = setup("/Res/player/Male_attack_right1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setup("/Res/player/Male_attack_right2", gp.tileSize * 2, gp.tileSize);
+        } else {
+            // Female Player Attack
+            attackUp1 = setup("/Res/player/Female_attack_up1", gp.tileSize, gp.tileSize * 2);
+            attackUp2 = setup("/Res/player/Female_attack_up2", gp.tileSize, gp.tileSize * 2);
+            attackDown1 = setup("/Res/player/Female_attack_down1", gp.tileSize, gp.tileSize * 2);
+            attackDown2 = setup("/Res/player/Female_attack_down2", gp.tileSize, gp.tileSize * 2);
+            attackLeft1 = setup("/Res/player/Female_attack_left1", gp.tileSize * 2, gp.tileSize);
+            attackLeft2 = setup("/Res/player/Female_attack_left2", gp.tileSize * 2, gp.tileSize);
+            attackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
+            attackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
+        }
     }
 
     public void update() {
