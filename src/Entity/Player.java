@@ -18,6 +18,7 @@ public class Player extends Entity{
     public final int screenY;
     private boolean incrementing = true;
     private int attackCounter = 0;
+    boolean hasDamagedMonster = false;
 
     public Player (GamePanel gp, KeyboardHandler KeyboardHandler) {
         super(gp);
@@ -232,38 +233,50 @@ public class Player extends Entity{
         if (attackCounter > 15 && attackCounter <= 25) {
             spriteNum = 2;
 
-            // Save the current worldX and worldY, and solidArea width and height
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int soildAreaWidth = solidArea.width;
-            int soildAreaHeight = solidArea.height;
+            if (!hasDamagedMonster) {
+                // Save the current worldX and worldY, and solidArea width and height
+                int currentWorldX = worldX;
+                int currentWorldY = worldY;
+                int soildAreaWidth = solidArea.width;
+                int soildAreaHeight = solidArea.height;
 
-            // Adjust player`s worldX&Y for the attackArea
-            switch (direction) {
-                case "up": worldY -= attackArea.height; break;
-                case "down": worldY += attackArea.height; break;
-                case "left": worldX -= attackArea.width; break;
-                case "right": worldX += attackArea.width; break;
+                // Adjust player`s worldX&Y for the attackArea
+                switch (direction) {
+                    case "up":
+                        worldY -= attackArea.height;
+                        break;
+                    case "down":
+                        worldY += attackArea.height;
+                        break;
+                    case "left":
+                        worldX -= attackArea.width;
+                        break;
+                    case "right":
+                        worldX += attackArea.width;
+                        break;
+                }
+
+                // AttackArea becomes solidArea
+                solidArea.width = attackArea.width;
+                solidArea.height = attackArea.height;
+
+                // Check for collision with monster with worldX and worldY, and solidArea
+                int monsterIndex = gp.collisionChecker.checkEntity(this, gp.monster);
+                damageMonster(monsterIndex);
+                hasDamagedMonster = true;
+
+                // After checking, restore the player`s worldX&Y and solidArea
+                worldX = currentWorldX;
+                worldY = currentWorldY;
+                solidArea.width = soildAreaWidth;
+                solidArea.height = soildAreaHeight;
             }
-
-            // AttackArea becomes solidArea
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
-
-            // Check for collision with monster with worldX and worldY, and solidArea
-            int monsterIndex = gp.collisionChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
-
-            // After checking, restore the player`s worldX&Y and solidArea
-            worldX = currentWorldX;
-            worldY = currentWorldY;
-            solidArea.width = soildAreaWidth;
-            solidArea.height = soildAreaHeight;
         }
         if (attackCounter > 25) {
             spriteNum = 1;
             attackCounter = 0;
             attacking = false;
+            hasDamagedMonster = false;
         }
     }
 
@@ -300,6 +313,7 @@ public class Player extends Entity{
     }
 
     public void damageMonster(int i) {
+//        System.out.println("damageMonster called");
         if (i != 999) {
             if (!gp.monster[i].invincible) {
                 gp.playSE(5);
@@ -338,7 +352,7 @@ public class Player extends Entity{
 
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You are Lv." + level + "now!/n" + "You became stronger!";
+            gp.ui.currentDialogue = "You are Lv. " + level + " now!\n" + "You became stronger!";
         }
     }
 

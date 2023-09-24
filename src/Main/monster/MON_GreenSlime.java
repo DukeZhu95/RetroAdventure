@@ -73,6 +73,26 @@ public class MON_GreenSlime extends Entity {
 
     public void damageReaction() {
         actionLockCounter = 0;
-        direction = gp.player.direction;
+
+//        direction = gp.player.direction; // Escape from the player
+
+        // Calculate the differences in position between the player and the monster
+        int diffX = gp.player.worldX - worldX;
+        int diffY = gp.player.worldY - worldY;
+
+        // Determine the direction based on the larger difference
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX < 0) {
+                direction = "left";
+            } else {
+                direction = "right";
+            }
+        } else {
+            if (diffY < 0) {
+                direction = "up";
+            } else {
+                direction = "down";
+            }
+        }
     }
 }

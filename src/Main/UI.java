@@ -13,7 +13,6 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     BufferedImage heart_full, heart_half, heart_empty;
-    public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
     public String currentDialogue = "";
