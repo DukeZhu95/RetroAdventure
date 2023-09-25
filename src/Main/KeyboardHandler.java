@@ -15,6 +15,7 @@ public class KeyboardHandler implements KeyListener {
     // Boolean variable for key pressed
     private boolean cPressed = false;
     private boolean spacePressed = false;
+    private boolean escPressed = false;
 
     public KeyboardHandler(GamePanel gp) {
         this.gp = gp;
@@ -48,6 +49,12 @@ public class KeyboardHandler implements KeyListener {
             if (code == KeyEvent.VK_SPACE && !spacePressed) {
                 spacePressed = true;
                 gp.gameState = gp.pauseState;
+            }
+
+            // Handle 'Escape' key press for option state
+            if (code == KeyEvent.VK_ESCAPE) {
+                escPressed = true;
+                gp.gameState = gp.optionState;
             }
         }
 
@@ -103,6 +110,19 @@ public class KeyboardHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 gp.player.selectItem();
             }
+        }
+
+        // Option state
+        if (code == KeyEvent.VK_ESCAPE) {
+            optionState(code);
+
+            // Handle 'Esc' key press to return to play state
+            if (!escPressed) {
+                escPressed = true;
+                gp.gameState = gp.playState;
+
+            }
+
         }
     }
     public void titleState(int code) {
@@ -192,6 +212,9 @@ public class KeyboardHandler implements KeyListener {
         if (code == KeyEvent.VK_J) {
             attackPressed = true;
         }
+        if (code == KeyEvent.VK_ESCAPE) {
+            gp.gameState = gp.optionState;
+        }
 
         // Debug
         if (code == KeyEvent.VK_T) {
@@ -215,6 +238,29 @@ public class KeyboardHandler implements KeyListener {
 //        if (code == KeyEvent.VK_C) {
 //            gp.gameState = gp.playState;
 //        }
+    }
+
+    public void optionState(int code) {
+
+        int maxCommandNum = 0;
+        switch (gp.ui.subState) {
+            case 0: maxCommandNum = 4;
+        }
+        if (code == KeyEvent.VK_W) {
+            gp.ui.commandNum--;
+            gp.playSE(9);
+            if (gp.ui.commandNum < 0) {
+                gp.ui.commandNum = maxCommandNum;
+            }
+        }
+        if (code == KeyEvent.VK_S) {
+            gp.ui.commandNum++;
+            gp.playSE(9);
+            if (gp.ui.commandNum > maxCommandNum) {
+                gp.ui.commandNum = 0;
+            }
+        }
+
     }
 
     @Override
@@ -241,6 +287,9 @@ public class KeyboardHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_C) {
             cPressed = false;
+        }
+        if (code == KeyEvent.VK_ESCAPE) {
+            escPressed = false;
         }
     }
 }

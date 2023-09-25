@@ -20,6 +20,7 @@ public class UI {
     public int titleScreenState = 0; // 0 = the 1st screen, 1 = the 2nd screen
     public int slotColumn = 0;
     public int slotRow = 0;
+    int subState = 0;
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -75,6 +76,10 @@ public class UI {
         if (gp.gameState == gp.characterState) {
             drawCharacterScreen();
             drawInventory();
+        }
+        // Option state
+        if (gp.gameState == gp.optionState) {
+            drawOptionScreen();
         }
     }
 
@@ -418,9 +423,78 @@ public class UI {
         g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
     }
 
+    public void drawOptionScreen() {
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40f));
+
+        // Sub window
+        int frameX = gp.tileSize * 5;
+        int frameY = (int) (gp.tileSize * 0.5);
+        int frameWidth = gp.tileSize * 6;
+        int frameHeight = gp.tileSize * 8;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        switch (subState) {
+            case 0: option_top(frameX, frameY); break;
+            case 1: break;
+            case 2: break;
+        }
+    }
+
+    public void option_top(int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // Title
+        String text = "Options";
+        textX = getXforCenteredText(text);
+        textY = frameY + gp.tileSize;
+        g2.drawString(text, textX, textY);
+
+        // Full screen ON/OFF
+        text = "Full Screen";
+        textX = frameX + gp.tileSize;
+        textY += gp.tileSize * 2;
+        g2.drawString(text, textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX - 32, textY);
+        }
+
+        // Music
+        text = "Music";
+        textY += gp.tileSize;
+        g2.drawString(text, textX, textY);
+        if (commandNum == 1) {
+            g2.drawString(">", textX - 32, textY);
+        }
+
+        // SE
+        text = "Sound Effect";
+        textY += gp.tileSize;
+        g2.drawString(text, textX, textY);
+        if (commandNum == 2) {
+            g2.drawString(">", textX - 32, textY);
+        }
+
+        // Control
+        text = "Control";
+        textY += gp.tileSize;
+        g2.drawString(text, textX, textY);
+        if (commandNum == 3) {
+            g2.drawString(">", textX - 32, textY);
+        }
+
+        // Quit game
+        text = "Quit Game";
+        textY += gp.tileSize;
+        g2.drawString(text, textX, textY);
+        if (commandNum == 4) {
+            g2.drawString(">", textX - 32, textY);
+        }
+    }
+
     public int getItemIndexOnSlot() {
-        int itemIndex = slotColumn + (slotRow * 5);
-        return itemIndex;
+        return slotColumn + (slotRow * 5);
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
