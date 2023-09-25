@@ -188,7 +188,7 @@ public class Player extends Entity{
             // Check event
             gp.eventHandler.checkEvent();
 
-            // If collision is not detected, move the player
+            // If a collision is not detected, move the player
             if (!collisionOn && !KeyboardHandler.enterPressed) {
 
                 switch (direction) {

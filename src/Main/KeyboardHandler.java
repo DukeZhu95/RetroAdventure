@@ -105,9 +105,6 @@ public class KeyboardHandler implements KeyListener {
             }
         }
     }
-
-
-
     public void titleState(int code) {
         if (gp.ui.titleScreenState == 0) {
             if (code == KeyEvent.VK_W) {
@@ -245,6 +242,5 @@ public class KeyboardHandler implements KeyListener {
         if (code == KeyEvent.VK_C) {
             cPressed = false;
         }
-
     }
 }
