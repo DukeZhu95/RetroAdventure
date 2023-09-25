@@ -27,6 +27,9 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldRows = 50;
     int FPS = 60; // Frames per second
 
+    // For full-screen
+    public boolean fullScreenOn = false;
+
     // System Settings
     TileManager tileManager = new TileManager(this);
     public KeyboardHandler keyboardHandler = new KeyboardHandler(this);

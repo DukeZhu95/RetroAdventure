@@ -428,9 +428,9 @@ public class UI {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40f));
 
         // Sub window
-        int frameX = gp.tileSize * 5;
+        int frameX = gp.tileSize * 5 - 20;
         int frameY = (int) (gp.tileSize * 0.5);
-        int frameWidth = gp.tileSize * 6;
+        int frameWidth = gp.tileSize * 6 + 20;
         int frameHeight = gp.tileSize * 8;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
@@ -439,6 +439,8 @@ public class UI {
             case 1: break;
             case 2: break;
         }
+
+        gp.keyboardHandler.enterPressed = false;
     }
 
     public void option_top(int frameX, int frameY) {
@@ -451,13 +453,16 @@ public class UI {
         textY = frameY + gp.tileSize;
         g2.drawString(text, textX, textY);
 
-        // Full screen ON/OFF
+        // Full-screen
         text = "Full Screen";
         textX = frameX + gp.tileSize;
         textY += gp.tileSize * 2;
         g2.drawString(text, textX, textY);
         if (commandNum == 0) {
             g2.drawString(">", textX - 32, textY);
+            if (gp.keyboardHandler.enterPressed) {
+                gp.fullScreenOn = !gp.fullScreenOn;
+            }
         }
 
         // Music
@@ -491,6 +496,25 @@ public class UI {
         if (commandNum == 4) {
             g2.drawString(">", textX - 32, textY);
         }
+
+        // Full-screen check box
+        textX = (int) (frameX + gp.tileSize * 4.5);
+        textY = frameY + gp.tileSize * 2 + 68;
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRect(textX, textY, 24, 24);
+        if (gp.fullScreenOn) {
+            g2.fillRect(textX, textY, textX + 24, textY + 24);
+        }
+
+        // Music volume
+        textY += gp.tileSize;
+        g2.drawRect(textX, textY, 120, 24);
+
+        // SE volume
+        textY += gp.tileSize;
+        g2.drawRect(textX, textY, 120, 24);
+
+        // Control
     }
 
     public int getItemIndexOnSlot() {

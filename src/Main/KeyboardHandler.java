@@ -52,7 +52,7 @@ public class KeyboardHandler implements KeyListener {
             }
 
             // Handle 'Escape' key press for option state
-            if (code == KeyEvent.VK_ESCAPE) {
+            if (code == KeyEvent.VK_ESCAPE && !escPressed) {
                 escPressed = true;
                 gp.gameState = gp.optionState;
             }
@@ -113,16 +113,14 @@ public class KeyboardHandler implements KeyListener {
         }
 
         // Option state
-        if (code == KeyEvent.VK_ESCAPE) {
-            optionState(code);
+        if (gp.gameState == gp.optionState) {
+            handleOptionNavigation(code);  // Call the navigation method here
 
             // Handle 'Esc' key press to return to play state
-            if (!escPressed) {
+            if (code == KeyEvent.VK_ESCAPE && !escPressed) {
                 escPressed = true;
                 gp.gameState = gp.playState;
-
             }
-
         }
     }
     public void titleState(int code) {
@@ -242,9 +240,34 @@ public class KeyboardHandler implements KeyListener {
 
     public void optionState(int code) {
 
+//        int maxCommandNum = 0;
+//        switch (gp.ui.subState) {
+//            case 0: maxCommandNum = 4;
+//        }
+//        if (code == KeyEvent.VK_W) {
+//            System.out.println("W key pressed in optionState. Current commandNum: " + gp.ui.commandNum); // 添加的打印语句
+//            gp.ui.commandNum--;
+//            gp.playSE(9);
+//            if (gp.ui.commandNum < 0) {
+//                gp.ui.commandNum = maxCommandNum;
+//            }
+//        }
+//        if (code == KeyEvent.VK_S) {
+//            System.out.println("S key pressed in optionState. Current commandNum: " + gp.ui.commandNum); // 添加的打印语句
+//            gp.ui.commandNum++;
+//            gp.playSE(9);
+//            if (gp.ui.commandNum > maxCommandNum) {
+//                gp.ui.commandNum = 0;
+//            }
+//        }
+
+    }
+
+    private void handleOptionNavigation(int code) {
+
         int maxCommandNum = 0;
-        switch (gp.ui.subState) {
-            case 0: maxCommandNum = 4;
+        if (gp.ui.subState == 0) {
+            maxCommandNum = 4;
         }
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
@@ -260,8 +283,8 @@ public class KeyboardHandler implements KeyListener {
                 gp.ui.commandNum = 0;
             }
         }
-
     }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
