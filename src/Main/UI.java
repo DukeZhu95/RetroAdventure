@@ -503,7 +503,7 @@ public class UI {
         g2.setStroke(new BasicStroke(3));
         g2.drawRect(textX, textY, 24, 24);
         if (gp.fullScreenOn) {
-            g2.fillRect(textX, textY, textX + 24, textY + 24);
+            g2.fillRect(textX, textY, 24, 24);
         }
 
         // Music volume
