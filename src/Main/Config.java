@@ -1,6 +1,5 @@
 package Main;
 
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class Config {
@@ -12,7 +11,7 @@ public class Config {
     public void saveConfig() {
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("/Res/config.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("./config.txt"));
 
             // Full-screen
             if (gp.fullScreenOn) {
@@ -41,7 +40,8 @@ public class Config {
     public void loadConfig() {
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/Res/config.txt"));
+            InputStream in = getClass().getResourceAsStream("/Res/config.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
             String s = br.readLine();
 
