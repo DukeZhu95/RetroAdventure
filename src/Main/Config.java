@@ -13,14 +13,14 @@ public class Config {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("./config.txt"));
 
-            // Full-screen
-            if (gp.fullScreenOn) {
-                bw.write("On");
-            }
-            if (!gp.fullScreenOn) {
-                bw.write("Off");
-            }
-            bw.newLine();
+//            // Full-screen
+//            if (gp.fullScreenOn) {
+//                bw.write("On");
+//            }
+//            if (!gp.fullScreenOn) {
+//                bw.write("Off");
+//            }
+//            bw.newLine();
 
             // Music volume
             bw.write(String.valueOf(gp.music.volumeScale));
@@ -41,27 +41,43 @@ public class Config {
 
         try {
             InputStream in = getClass().getResourceAsStream("/Res/config.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-
-            String s = br.readLine();
-
-            // Full-screen
-            if (s.equals("On")) {
-                gp.fullScreenOn = true;
+            BufferedReader br = null;
+            if (in != null) {
+                br = new BufferedReader(new InputStreamReader(in));
             }
-            if (s.equals("Off")) {
-                gp.fullScreenOn = false;
+
+            String s = null;
+            if (br != null) {
+                s = br.readLine();
             }
+
+//            // Full-screen
+//            if (s.equals("On")) {
+//                gp.fullScreenOn = true;
+//            }
+//            if (s.equals("Off")) {
+//                gp.fullScreenOn = false;
+//            }
 
             // Music volume
-            s = br.readLine();
-            gp.music.volumeScale = Integer.parseInt(s);
+            if (br != null) {
+                s = br.readLine();
+            }
+            if (s != null) {
+                gp.music.volumeScale = Integer.parseInt(s);
+            }
 
             // Sound effect volume
-            s = br.readLine();
-            gp.se.volumeScale = Integer.parseInt(s);
+            if (br != null) {
+                s = br.readLine();
+            }
+            if (s != null) {
+                gp.se.volumeScale = Integer.parseInt(s);
+            }
 
-            br.close();
+            if (br != null) {
+                br.close();
+            }
 
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -237,7 +237,8 @@ public class KeyboardHandler implements KeyListener {
         }
 
         int maxCommandNum = switch (gp.ui.subState) {
-            case 0 -> 4;
+            case 0 -> 3;
+            case 2 -> 1;
             case 3 -> 1;
             default -> 0;
         };
@@ -257,12 +258,12 @@ public class KeyboardHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_A) {
             if (gp.ui.subState == 0) {
-                if (gp.ui.commandNum == 1 && gp.music.volumeScale > 0) {
+                if (gp.ui.commandNum == 0 && gp.music.volumeScale > 0) {
                     gp.music.volumeScale--;
                     gp.music.checkVolume();
                     gp.playSE(9);
                 }
-                if (gp.ui.commandNum == 2 && gp.se.volumeScale > 0) {
+                if (gp.ui.commandNum == 1 && gp.se.volumeScale > 0) {
                     gp.se.volumeScale--;
                     gp.playSE(9);
                 }
@@ -271,12 +272,12 @@ public class KeyboardHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_D) {
             if (gp.ui.subState == 0) {
-                if (gp.ui.commandNum == 1 && gp.music.volumeScale < 5) {
+                if (gp.ui.commandNum == 0 && gp.music.volumeScale < 5) {
                     gp.music.volumeScale++;
                     gp.music.checkVolume();
                     gp.playSE(9);
                 }
-                if (gp.ui.commandNum == 2 && gp.se.volumeScale < 5) {
+                if (gp.ui.commandNum == 1 && gp.se.volumeScale < 5) {
                     gp.se.volumeScale++;
                     gp.playSE(9);
                 }
