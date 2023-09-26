@@ -436,7 +436,7 @@ public class UI {
 
         switch (subState) {
             case 0: option_top(frameX, frameY); break;
-            case 1: break;
+            case 1: option_fullScreenNotification(frameX, frameY);
             case 2: break;
         }
 
@@ -453,7 +453,7 @@ public class UI {
         textY = frameY + gp.tileSize;
         g2.drawString(text, textX, textY);
 
-        // Full-screen
+        // Full-screen ON/OFF
         text = "Full Screen";
         textX = frameX + gp.tileSize;
         textY += gp.tileSize * 2;
@@ -462,7 +462,10 @@ public class UI {
             g2.drawString(">", textX - 32, textY);
             if (gp.keyboardHandler.enterPressed) {
                 gp.fullScreenOn = !gp.fullScreenOn;
+
+                subState = 1;
             }
+
         }
 
         // Music
@@ -515,6 +518,28 @@ public class UI {
         g2.drawRect(textX, textY, 120, 24);
 
         // Control
+    }
+
+    public void option_fullScreenNotification(int frameX, int frameY) {
+        int textX = frameX + gp.tileSize;
+        int textY = frameY + gp.tileSize * 3;
+        currentDialogue = "This change will take \neffect after restart \nthe game";
+
+        for (String line: currentDialogue.split("\n")) {
+            g2.drawString(line, textX, textY);
+            textY += 40;
+        }
+
+        // Back
+        textY = frameY + gp.tileSize * 9;
+        g2.drawString("Back", textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX - 25, textY);
+            if (gp.keyboardHandler.enterPressed) {
+                subState = 0;
+            }
+        }
+
     }
 
     public int getItemIndexOnSlot() {
