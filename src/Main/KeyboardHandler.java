@@ -122,7 +122,56 @@ public class KeyboardHandler implements KeyListener {
                 gp.gameState = gp.playState;
             }
         }
+
+        // Game over state
+        if (gp.gameState == gp.gameOverState) {
+            if (code == KeyEvent.VK_ENTER) {
+                gameOverState(code);
+            }
+
+            if (code == KeyEvent.VK_W) {
+                gp.ui.commandNum--;
+                if (gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = 1;
+                }
+                gp.playSE(9);
+            }
+            if (code == KeyEvent.VK_S) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum > 1) {
+                    gp.ui.commandNum = 0;
+                }
+                gp.playSE(9);
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if (gp.ui.commandNum == 0) {
+                    gp.gameState = gp.playState;
+                    gp.retry();
+                } else if (gp.ui.commandNum == 1) {
+                    gp.gameState = gp.titleState;
+                    gp.restart();
+                }
+            }
+        }
     }
+
+    private void gameOverState(int code) {
+//        if (code == KeyEvent.VK_W) {
+//            gp.ui.commandNum--;
+//            if (gp.ui.commandNum < 0) {
+//                gp.ui.commandNum = 1;
+//            }
+//            gp.playSE(9);
+//        }
+//        if (code == KeyEvent.VK_S) {
+//            gp.ui.commandNum++;
+//            if (gp.ui.commandNum > 1) {
+//                gp.ui.commandNum = 0;
+//            }
+//            gp.playSE(9);
+//        }
+    }
+
     public void titleState(int code) {
         if (gp.ui.titleScreenState == 0) {
             if (code == KeyEvent.VK_W) {

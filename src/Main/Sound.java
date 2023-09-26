@@ -25,6 +25,7 @@ public class Sound {
         soundURL[7] = getClass().getResource("/Res/sound/swingweapon.wav");
         soundURL[8] = getClass().getResource("/Res/sound/levelup.wav");
         soundURL[9] = getClass().getResource("/Res/sound/cursor.wav");
+        soundURL[10] = getClass().getResource("/Res/sound/gameover.wav");
     }
 
     public void setFile(int i) {

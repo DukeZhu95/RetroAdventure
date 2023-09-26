@@ -57,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int dialogueState = 3;
     public final int characterState = 4;
     public final int optionState = 5;
+    public final int gameOverState = 6;
 
     // Title image
     public NPC_Tigger npcTigger;
@@ -87,7 +88,22 @@ public class GamePanel extends JPanel implements Runnable{
         gameState = titleState;
     }
 
+    public void retry() {
+        player.setDefaultPositions();
+        player.restoreLife();
+        aSetter.setNPC();
+        aSetter.setMonster();
+    }
 
+    public void restart() {
+        player.setDefaultValues();
+        player.setDefaultPositions();
+        player.restoreLife();
+        player.setItems();
+        aSetter.setObject();
+        aSetter.setNPC();
+        aSetter.setMonster();
+    }
 
     public void startGameThread() {
         gameThread = new Thread(this);

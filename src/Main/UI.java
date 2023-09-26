@@ -81,6 +81,10 @@ public class UI {
         if (gp.gameState == gp.optionState) {
             drawOptionScreen();
         }
+        // Game over state
+        if (gp.gameState == gp.gameOverState) {
+            drawGameOverScreen();
+        }
     }
 
     public void drawPlayerLife() {
@@ -421,6 +425,51 @@ public class UI {
         g2.setColor(Color.BLACK);
         g2.setStroke(new BasicStroke(3));
         g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+    }
+    public void drawGameOverScreen() {
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        int x;
+        int y;
+        String text;
+        g2.setFont(pixelatedFont_80Bold.deriveFont(Font.BOLD, 112f));
+
+        text = "Game Over";
+        // Shadow
+        g2.setColor(Color.BLACK);
+        x = getXforCenteredText(text);
+        y = gp.tileSize * 3;
+        g2.drawString(text, x + 6, y + 6);
+        // Main
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+        // Tigger image
+
+        // Retry
+        g2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+        text = "Retry";
+        x = getXforCenteredText(text);
+        y += gp.tileSize * 3;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x - gp.tileSize, y);
+        }
+
+        // Back to the main menu
+        text = "Main Menu";
+        x = getXforCenteredText(text);
+        y += (int) (gp.tileSize * 0.75);
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x - gp.tileSize, y);
+        }
+        if (gp.keyboardHandler.enterPressed) {
+            gp.gameState = gp.titleState;
+            titleScreenState = 0;
+            commandNum = 0;
+        }
+
     }
 
     public void drawOptionScreen() {

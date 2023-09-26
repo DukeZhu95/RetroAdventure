@@ -73,6 +73,7 @@ public class Player extends Entity{
     }
 
     public void setItems() {
+        inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new OBJ_Key(gp));
@@ -234,6 +235,10 @@ public class Player extends Entity{
         }
         if (life > maxLife) {
             life = maxLife;
+        }
+        if (life <= 0) {
+            gp.gameState = gp.gameOverState;
+            gp.playSE(10);
         }
     }
 
@@ -418,6 +423,18 @@ public class Player extends Entity{
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You are Lv. " + level + " now!\n" + "You became stronger!";
         }
+    }
+    public void setDefaultPositions() {
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
+        speed = 5;
+        direction = "down";
+        spriteNum = 2;
+    }
+
+    public void restoreLife() {
+        life = maxLife;
+        invincible = false;
     }
 
     public void selectItem() {
