@@ -6,6 +6,7 @@ import Entity.NPC_Tigger;
 import tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,6 +29,10 @@ public class GamePanel extends JPanel implements Runnable{
     int FPS = 60; // Frames per second
 
     // For full-screen
+    int screenWidth2 = screenWidth;
+    int screenHeight2 = screenHeight;
+    BufferedImage tempScreen;
+    Graphics2D g2;
     public boolean fullScreenOn = false;
 
     // System Settings
@@ -39,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eventHandler = new EventHandler(this);
+    Config config = new Config(this);
     Thread gameThread;
 
     // Entities & Objects
@@ -77,16 +83,19 @@ public class GamePanel extends JPanel implements Runnable{
         this.gameState = newState;
     }
 
-
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
-//        playMusic(0);
         gameState = titleState;
+
+        tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
+        g2 = (Graphics2D)tempScreen.getGraphics();
+
+        if (fullScreenOn) {
+//            setFullScreen();
+        }
     }
-
-
 
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -113,7 +122,8 @@ public class GamePanel extends JPanel implements Runnable{
 
             if (delta >= 1) {
                 update();
-                repaint();
+                drawToTempScreen(); // Draw everything to the buffered image
+                drawToScreen(); // Draw the buffered image to the screen
                 delta--;
                 drawCount++;
             }
@@ -157,12 +167,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-    public void paintComponent(Graphics g) {
-//        System.out.println("Start of paintComponent. gameState: " + gameState);
-
-        super.paintComponent(g);
-        Graphics2D g2= (Graphics2D) g;
-
+    public void drawToTempScreen() {
         // Debug
         long drawStart = 0;
         if (keyboardHandler.checkDrawTime) {
@@ -220,10 +225,12 @@ public class GamePanel extends JPanel implements Runnable{
         if (gameState == characterState) {
             ui.drawCharacterScreen();
         }
+    }
 
-        g2.dispose();
-
-//        System.out.println("End of paintComponent. gameState: " + gameState);
+    public void drawToScreen() {
+        Graphics g = getGraphics();
+        g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);
+        g.dispose();
     }
 
     public void playMusic(int i) {

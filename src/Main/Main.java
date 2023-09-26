@@ -14,6 +14,12 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
 
+        gamePanel.config.loadConfig();
+        if (gamePanel.fullScreenOn) {
+            window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            window.setUndecorated(true);
+        }
+
         window.pack();
 
         window.setLocationRelativeTo(null);

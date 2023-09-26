@@ -436,8 +436,9 @@ public class UI {
 
         switch (subState) {
             case 0: option_top(frameX, frameY); break;
-            case 1: option_fullScreenNotification(frameX, frameY);
-            case 2: break;
+            case 1: option_fullScreenNotification(frameX, frameY); break;
+            case 2: option_control(frameX, frameY); break;
+            case 3: option_quitGame(frameX, frameY); break;
         }
 
         gp.keyboardHandler.enterPressed = false;
@@ -490,6 +491,10 @@ public class UI {
         g2.drawString(text, textX, textY);
         if (commandNum == 3) {
             g2.drawString(">", textX - 32, textY);
+            if (gp.keyboardHandler.enterPressed) {
+                subState = 2;
+                commandNum = 0;
+            }
         }
 
         // Quit game
@@ -498,6 +503,10 @@ public class UI {
         g2.drawString(text, textX, textY);
         if (commandNum == 4) {
             g2.drawString(">", textX - 32, textY);
+            if (gp.keyboardHandler.enterPressed) {
+                subState = 3;
+                commandNum = 0;
+            }
         }
 
         // Full-screen check box
@@ -521,7 +530,7 @@ public class UI {
         volumeWidth = 24 * gp.se.volumeScale;
         g2.fillRect(textX, textY, volumeWidth, 24);
 
-        // Control
+        gp.config.saveConfig();
     }
 
     public void option_fullScreenNotification(int frameX, int frameY) {
@@ -543,7 +552,83 @@ public class UI {
                 subState = 0;
             }
         }
+    }
 
+    public void option_control(int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // Title
+        String text = "Keyboard Control Setting";
+        textX = getXforCenteredText(text);
+        textY = frameY + gp.tileSize;
+        g2.drawString(text, textX, textY);
+
+        textX = frameX + gp.tileSize;
+        textY += gp.tileSize;
+        g2.drawString("Move", textX, textY); textY += gp.tileSize;
+        g2.drawString("Attack", textX, textY); textY += gp.tileSize;
+        g2.drawString("Interact", textX, textY); textY += gp.tileSize;
+        g2.drawString("Inventory", textX, textY); textY += gp.tileSize;
+        g2.drawString("Pause", textX, textY); textY += gp.tileSize;
+
+        textX = frameX + gp.tileSize * 4;
+        textY = frameY + gp.tileSize * 2;
+        g2.drawString("WASD", textX, textY); textY += gp.tileSize;
+        g2.drawString("J", textX, textY); textY += gp.tileSize;
+        g2.drawString("Enter", textX, textY); textY += gp.tileSize;
+        g2.drawString("C", textX, textY); textY += gp.tileSize;
+        g2.drawString("Space", textX, textY); textY += gp.tileSize;
+
+        // Back
+        textX = frameX + gp.tileSize;
+        textY = frameY + gp.tileSize * 7;
+        g2.drawString("Back", textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX - 25, textY);
+            if (gp.keyboardHandler.enterPressed) {
+                subState = 0;
+                commandNum = 3;
+            }
+        }
+    }
+
+    private void option_quitGame(int frameX, int frameY) {
+        int textX = frameX + gp.tileSize;
+        int textY = frameY + gp.tileSize * 3;
+
+        currentDialogue = "Are you sure you \nwant to quit the \ngame and return to \nthe main menu?";
+
+        for (String line: currentDialogue.split("\n")) {
+            g2.drawString(line, textX, textY);
+            textY += 40;
+        }
+
+        // Yes
+        String text = "Yes";
+        textX = getXforCenteredText(text);
+        textY = frameY + gp.tileSize * 6;
+        g2.drawString(text, textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX - 25, textY);
+            if (gp.keyboardHandler.enterPressed) {
+                subState = 0;
+                gp.gameState = gp.titleState;
+            }
+        }
+
+        // No
+        text = "No";
+        textX = getXforCenteredText(text);
+        textY += gp.tileSize;
+        g2.drawString(text, textX, textY);
+        if (commandNum == 1) {
+            g2.drawString(">", textX - 25, textY);
+            if (gp.keyboardHandler.enterPressed) {
+                subState = 0;
+                commandNum = 4;
+            }
+        }
     }
 
     public int getItemIndexOnSlot() {

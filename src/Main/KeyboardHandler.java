@@ -60,7 +60,7 @@ public class KeyboardHandler implements KeyListener {
 
         // Pause state
         if (gp.gameState == gp.pauseState) {
-            pauseState(code);
+            pauseState();
 
             // Handle 'Space' key press to return to play state
             if (code == KeyEvent.VK_SPACE && !spacePressed) {
@@ -76,7 +76,7 @@ public class KeyboardHandler implements KeyListener {
 
         // Character state
         if (gp.gameState == gp.characterState) {
-            characterState(code);
+            characterState();
 
             // Handle 'C' key press to return to play state
             if (code == KeyEvent.VK_C && !cPressed) {
@@ -220,11 +220,7 @@ public class KeyboardHandler implements KeyListener {
         }
     }
 
-    public void pauseState(int code) {
-//        if (code == KeyEvent.VK_SPACE) {
-//            gp.gameState = gp.playState;
-//        }
-    }
+    public void pauseState() {}
 
     public void dialogueState(int code) {
         if (code == KeyEvent.VK_ENTER) {
@@ -232,15 +228,7 @@ public class KeyboardHandler implements KeyListener {
         }
     }
 
-    public void characterState(int code) {
-//        if (code == KeyEvent.VK_C) {
-//            gp.gameState = gp.playState;
-//        }
-    }
-
-    public void optionState(int code) {
-
-    }
+    public void characterState() {}
 
     private void handleOptionNavigation(int code) {
 
@@ -248,10 +236,11 @@ public class KeyboardHandler implements KeyListener {
             enterPressed = true;
         }
 
-        int maxCommandNum = 0;
-        if (gp.ui.subState == 0) {
-            maxCommandNum = 4;
-        }
+        int maxCommandNum = switch (gp.ui.subState) {
+            case 0 -> 4;
+            case 3 -> 1;
+            default -> 0;
+        };
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
             gp.playSE(9);
