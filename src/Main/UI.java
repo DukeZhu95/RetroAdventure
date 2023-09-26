@@ -511,11 +511,15 @@ public class UI {
 
         // Music volume
         textY += gp.tileSize;
-        g2.drawRect(textX, textY, 120, 24);
+        g2.drawRect(textX, textY, 120, 24); // 120 = 24 * 5
+        int volumeWidth = 24 * gp.music.volumeScale;
+        g2.fillRect(textX, textY, volumeWidth, 24);
 
         // SE volume
         textY += gp.tileSize;
         g2.drawRect(textX, textY, 120, 24);
+        volumeWidth = 24 * gp.se.volumeScale;
+        g2.fillRect(textX, textY, volumeWidth, 24);
 
         // Control
     }
@@ -531,7 +535,7 @@ public class UI {
         }
 
         // Back
-        textY = frameY + gp.tileSize * 9;
+        textY = frameY + gp.tileSize * 7;
         g2.drawString("Back", textX, textY);
         if (commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
