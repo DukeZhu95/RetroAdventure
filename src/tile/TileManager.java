@@ -14,14 +14,15 @@ import java.util.Objects;
 public class TileManager {
     GamePanel gp;
     public Tile[] tile;
-    public int[][] mapTileNum;
+    public int[][][] mapTileNum;
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[50];
-        mapTileNum = new int[gp.maxWorldColumns][gp.maxWorldRows];
+        mapTileNum = new int[gp.maxMap][gp.maxWorldColumns][gp.maxWorldRows];
         getTileImage();
-        loadMap("/Res/maps/worldV2.txt");
+        loadMap("/Res/maps/worldV3.txt", 0);
+        loadMap("/Res/maps/interior01.txt", 1);
     }
 
     public void getTileImage() {
@@ -91,7 +92,7 @@ public class TileManager {
         }
     }
 
-    public void loadMap(String filePath) {
+    public void loadMap(String filePath, int map) {
         try{
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = null;
@@ -114,7 +115,7 @@ public class TileManager {
                         numbers = line.split(" ");
                     }
                     int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[col][row] = num;
+                    mapTileNum[map][col][row] = num;
                     col++;
                 }
                 if (col == gp.maxWorldColumns) {
@@ -136,7 +137,7 @@ public class TileManager {
 
         while(worldColumns < gp.maxWorldColumns && worldRows < gp.maxWorldRows) {
 
-            int tileNum = mapTileNum[worldColumns][worldRows];
+            int tileNum = mapTileNum[gp.currentMap][worldColumns][worldRows];
 
             int worldX = worldColumns * gp.tileSize;
             int worldY = worldRows * gp.tileSize;
