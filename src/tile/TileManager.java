@@ -71,6 +71,9 @@ public class TileManager {
         setup(39, "earth", false);
         setup(40, "wall", true);
         setup(41, "tree", true);
+        setup(42, "Underground", false);
+        setup(43, "floor01", false);
+        setup(44, "table01", true);
     }
 
     public void setup(int index, String imageName, boolean collision) {

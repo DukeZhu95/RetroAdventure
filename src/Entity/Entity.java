@@ -187,18 +187,18 @@ public class Entity {
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
             if (attacking) {
-                System.out.println("Attacking!");
-                image = switch (direction) {
-                    case "up" ->
-                            spriteNum == 1 ? (gp.isMale ? MaleAttackUp1 : FemaleAttackUp1) : (gp.isMale ? MaleAttackUp2 : FemaleAttackUp2);
-                    case "down" ->
-                            spriteNum == 1 ? (gp.isMale ? MaleAttackDown1 : FemaleAttackDown1) : (gp.isMale ? MaleAttackDown2 : FemaleAttackDown2);
-                    case "left" ->
-                            spriteNum == 1 ? (gp.isMale ? MaleAttackLeft1 : FemaleAttackLeft1) : (gp.isMale ? MaleAttackLeft2 : FemaleAttackLeft2);
-                    case "right" ->
-                            spriteNum == 1 ? (gp.isMale ? MaleAttackRight1 : FemaleAttackRight1) : (gp.isMale ? MaleAttackRight2 : FemaleAttackRight2);
-                    default -> image;
-                };
+//                System.out.println("Attacking!");
+//                image = switch (direction) {
+//                    case "up" ->
+//                            spriteNum == 1 ? (gp.isMale ? MaleAttackUp1 : FemaleAttackUp1) : (gp.isMale ? MaleAttackUp2 : FemaleAttackUp2);
+//                    case "down" ->
+//                            spriteNum == 1 ? (gp.isMale ? MaleAttackDown1 : FemaleAttackDown1) : (gp.isMale ? MaleAttackDown2 : FemaleAttackDown2);
+//                    case "left" ->
+//                            spriteNum == 1 ? (gp.isMale ? MaleAttackLeft1 : FemaleAttackLeft1) : (gp.isMale ? MaleAttackLeft2 : FemaleAttackLeft2);
+//                    case "right" ->
+//                            spriteNum == 1 ? (gp.isMale ? MaleAttackRight1 : FemaleAttackRight1) : (gp.isMale ? MaleAttackRight2 : FemaleAttackRight2);
+//                    default -> image;
+//                };
             } else {
                 switch (direction) {
                     case "up":
