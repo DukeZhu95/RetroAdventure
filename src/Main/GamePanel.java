@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldColumns = 50;
     public final int maxWorldRows = 50;
     public final int maxMap = 10;
-    public int currentMap = 1;
+    public int currentMap = 0;
     int FPS = 60; // Frames per second
 
     // For full-screen
