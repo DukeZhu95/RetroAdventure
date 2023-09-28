@@ -60,6 +60,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int characterState = 4;
     public final int optionState = 5;
     public final int gameOverState = 6;
+    public final int transitionState = 7;
+    public final int tradeState = 8;
 
     // Title image
     public NPC_Tigger npcTigger;
@@ -256,6 +258,13 @@ public class GamePanel extends JPanel implements Runnable{
     public void stopMusic() {
         music.stop();
     }
+//    public void stopBgm(int i) {
+//
+//        music.setFile(i);
+//        music.stop();
+//
+//    }
+
 
     public void playSE(int i) {
         se.setFile(i);

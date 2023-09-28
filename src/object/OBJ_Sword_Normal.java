@@ -15,5 +15,6 @@ public class OBJ_Sword_Normal extends Entity {
         attackArea.width = 68;
         attackArea.height = 68;
         description = "[" + name + "]\n" + "A sword made of iron are more \npowerful and relatively cheap....";
+        price = 200;
     }
 }

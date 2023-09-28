@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
@@ -58,10 +59,13 @@ public class Entity {
     public Entity currentShield;
 
     // Item attributes
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
     public int value;
     public int attackValue;
     public int defenseValue;
     public String description = "";
+    public int price;
 
     // Type
     public int type; // 0: Player, 1: NPC, 2: Monster

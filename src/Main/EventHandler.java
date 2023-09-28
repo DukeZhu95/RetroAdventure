@@ -1,10 +1,13 @@
 package Main;
 
+import Entity.Entity;
+
 public class EventHandler {
     GamePanel gp;
     EventRect[][][] eventRect;
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
+    int tempMap, tempCol, tempRow;
 
     public EventHandler(GamePanel gp) {
         this.gp = gp;
@@ -49,19 +52,31 @@ public class EventHandler {
             if (hit(0,27, 16, "right")) {damagePit(gp.dialogueState);}
 //            if (hit(0,23, 19, "any")) {damagePit(gp.dialogueState);}
             else if (hit(0,23, 12, "up")) {healingPool(gp.dialogueState);}
-            else if (hit(0,10,39,"any")) {telePort(1,12,13);}
-            else if (hit(1,12,13,"any")) {telePort(0,10,39);}
+            else if (hit(0,10,39,"any")) {telePort1(1,12,13);}
+            else if (hit(1,12,13,"any")) {telePort2(0,10,39);}
+            else if (hit(1,12,9,"up")) {speak(gp.npc[1][0]);}
         }
     }
 
-    private void telePort(int map, int col, int row) {
-        gp.currentMap = map;
-        gp.player.worldX = col * gp.tileSize;
-        gp.player.worldY = row * gp.tileSize;
-        previousEventX = gp.player.worldX;
-        previousEventY = gp.player.worldY;
+    public void telePort1(int map, int col, int row) {
+        gp.gameState = gp.transitionState;
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
         canTouchEvent = false;
-        gp.playSE(11);
+//        gp.playSE(12);
+    }
+
+    public void telePort2(int map, int col, int row) {
+        gp.gameState = gp.transitionState;
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
+        canTouchEvent = false;
+//        gp.stopMusic();
+//        System.out.println("Bgm12 has been stopped!");
+//        gp.playSE(0);
+
     }
 
     public boolean hit(int map, int col, int row, String reqDirection) {
@@ -89,6 +104,14 @@ public class EventHandler {
             eventRect[map][col][row].y = eventRect[map][col][row].eventRectDefaultY;
         }
         return hit;
+    }
+
+    private void speak(Entity entity) {
+        if (gp.keyboardHandler.enterPressed) {
+            gp.gameState = gp.dialogueState;
+//            gp.player.attackCanceled = true;
+            entity.speak();
+        }
     }
 
     public void damagePit(int gameState) {

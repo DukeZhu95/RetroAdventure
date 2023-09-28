@@ -14,7 +14,6 @@ public class Sound {
     float volume;
 
     public Sound() {
-
         soundURL[0] = getClass().getResource("/Res/sound/Background.wav");
         soundURL[1] = getClass().getResource("/Res/sound/coin.wav");
         soundURL[2] = getClass().getResource("/Res/sound/powerup.wav");
@@ -27,6 +26,7 @@ public class Sound {
         soundURL[9] = getClass().getResource("/Res/sound/cursor.wav");
         soundURL[10] = getClass().getResource("/Res/sound/gameover.wav");
         soundURL[11] = getClass().getResource("/Res/sound/stairs.wav");
+        soundURL[12] = getClass().getResource("/Res/sound/Main.wav");
     }
 
     public void setFile(int i) {
@@ -53,10 +53,10 @@ public class Sound {
 
     }
     public void stop() {
-
         clip.stop();
-
+//        clip.close();  // Add this line
     }
+
     public void checkVolume() {
 
         switch(volumeScale) {

@@ -15,5 +15,6 @@ public class OBJ_Sword_Wood extends Entity {
         attackArea.width = 64;
         attackArea.height = 64;
         description = "[" + name + "]\n" + "A cheap and ordinary weapon, at\n least it is more powerful than \na fist...";
+        price = 50;
     }
 }

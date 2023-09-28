@@ -17,8 +17,7 @@ public class Player extends Entity{
     private boolean incrementing = true;
     private int attackCounter = 0;
     boolean hasDamagedMonster = false;
-    public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int maxInventorySize = 20;
+
 
     public Player (GamePanel gp, KeyboardHandler KeyboardHandler) {
         super(gp);
@@ -53,6 +52,8 @@ public class Player extends Entity{
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
+//        worldX = gp.tileSize * 12;
+//        worldY = gp.tileSize * 12;
         speed = 5;
         direction = "down";
         spriteNum = 2;
@@ -65,7 +66,8 @@ public class Player extends Entity{
         dexterity = 1;
         exp = 0;
         nextLevelExp = 10;
-        coin = 0;
+        coin = 500;
+//        coin = 0;
         currentWeapon = new OBJ_Sword_Wood(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         attack = getAttack();
@@ -440,7 +442,7 @@ public class Player extends Entity{
     }
 
     public void selectItem() {
-        int itemIndex = gp.ui.getItemIndexOnSlot();
+        int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotColumn, gp.ui.playerSlotRow);
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
             if (selectedItem.type == type_sword || selectedItem.type == type_axe) {
