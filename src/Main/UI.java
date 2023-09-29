@@ -704,7 +704,7 @@ public class UI {
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         if (counter == 1) {
-            gp.stopMusic();
+//            gp.stopMusic();
             gp.playSE(11);
         }
 

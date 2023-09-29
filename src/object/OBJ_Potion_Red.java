@@ -11,9 +11,9 @@ public class OBJ_Potion_Red extends Entity {
         this.gp = gp;
 
         if (gp == null) {
-            System.out.println("GamePanel object is null in OBJ_Potion_Red constructor.");
+//            System.out.println("GamePanel object is null in OBJ_Potion_Red constructor.");
         } else {
-            System.out.println("GamePanel object is not null in OBJ_Potion_Red constructor.");
+//            System.out.println("GamePanel object is not null in OBJ_Potion_Red constructor.");
         }
 
         type = type_consumable;

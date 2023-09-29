@@ -195,7 +195,7 @@ public class Entity {
                     break; case "down": if (spriteNum == 1) {image = down1;}
                 else if (spriteNum == 2) {image = down2;}
                 else if (spriteNum == 3) {image = down3;}
-                break;
+                    break;
                 case "left":
                     if (spriteNum == 1) {image = left1;}
                     else if (spriteNum == 2) {image = left2;}
@@ -203,7 +203,7 @@ public class Entity {
                     break; case "right": if (spriteNum == 1) {image = right1;}
                 else if (spriteNum == 2) {image = right2;}
                 else if (spriteNum == 3) {image = right3;}
-                break;
+                    break;
             }
 
             // Monster HP bar

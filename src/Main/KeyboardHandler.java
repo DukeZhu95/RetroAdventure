@@ -16,6 +16,7 @@ public class KeyboardHandler implements KeyListener {
     private boolean cPressed = false;
     private boolean spacePressed = false;
     private boolean escPressed = false;
+    public boolean musicIsPlaying = false;
 
     public KeyboardHandler(GamePanel gp) {
         this.gp = gp;
@@ -38,6 +39,10 @@ public class KeyboardHandler implements KeyListener {
         // Play state
         if (gp.gameState == gp.playState) {
             playState(code);
+            if (!musicIsPlaying) {
+                gp.playMusic(12);
+                musicIsPlaying = true;
+            }
 
             // Handle 'C' key press for character state
             if (code == KeyEvent.VK_C && !cPressed) {
@@ -129,7 +134,7 @@ public class KeyboardHandler implements KeyListener {
                 if (gp.ui.commandNum == 0) {
                     gp.gameState = gp.playState;
                     gp.retry();
-                    gp.playMusic(0);
+//                    gp.playMusic(0);
                 } else if (gp.ui.commandNum == 1) {
                     gp.gameState = gp.titleState;
                     gp.restart();
@@ -287,14 +292,14 @@ public class KeyboardHandler implements KeyListener {
                     // You are a male player
                     gp.isMale = true;
                     gp.gameState = gp.playState;
-                    gp.playMusic(0);
+//                    gp.playMusic(0);
                     gp.player.getPlayerImage();
                 }
                 if (gp.ui.commandNum == 1) {
                     // You are a female player
                     gp.isMale = false;
                     gp.gameState = gp.playState;
-                    gp.playMusic(0);
+//                    gp.playMusic(0);
                     gp.player.getPlayerImage();
                 }
                 if (gp.ui.commandNum == 2) {
