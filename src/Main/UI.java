@@ -96,7 +96,7 @@ public class UI {
             drawTransition();
         }
         // Trade state
-        if (gp.gameState == gp.tradeState) {
+        if (gp.gameState == gp.tradeState) {;
             drawTradeScreen();
         }
     }
@@ -368,7 +368,6 @@ public class UI {
         g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 15, null);
         textY += gp.tileSize;
     }
-
     public void drawInventory(Entity entity, boolean cursor) {
 
         int frameX;
@@ -765,7 +764,7 @@ public class UI {
             if (gp.keyboardHandler.enterPressed) {
                 commandNum = 0;
                 gp.gameState = gp.dialogueState;
-                currentDialogue = "Fair well, warrior!";
+                currentDialogue = "Farewell!";
             }
         }
 

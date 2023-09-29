@@ -81,7 +81,6 @@ public class Entity {
     public Entity(GamePanel gp) {
         this.gp = gp;
     }
-
     public void setAction() {}
     public void damageReaction() {}
     public void speak() {
@@ -98,7 +97,6 @@ public class Entity {
             case "right" -> direction = "left";
         }
     }
-
     public void use(Entity entity) {}
     public void checkDrop() {}
     public void dropItem(Entity droppedItem) {
@@ -177,7 +175,6 @@ public class Entity {
             }
         }
     }
-
     public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
@@ -190,42 +187,23 @@ public class Entity {
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
 
-            if (attacking) {
-//                System.out.println("Attacking!");
-//                image = switch (direction) {
-//                    case "up" ->
-//                            spriteNum == 1 ? (gp.isMale ? MaleAttackUp1 : FemaleAttackUp1) : (gp.isMale ? MaleAttackUp2 : FemaleAttackUp2);
-//                    case "down" ->
-//                            spriteNum == 1 ? (gp.isMale ? MaleAttackDown1 : FemaleAttackDown1) : (gp.isMale ? MaleAttackDown2 : FemaleAttackDown2);
-//                    case "left" ->
-//                            spriteNum == 1 ? (gp.isMale ? MaleAttackLeft1 : FemaleAttackLeft1) : (gp.isMale ? MaleAttackLeft2 : FemaleAttackLeft2);
-//                    case "right" ->
-//                            spriteNum == 1 ? (gp.isMale ? MaleAttackRight1 : FemaleAttackRight1) : (gp.isMale ? MaleAttackRight2 : FemaleAttackRight2);
-//                    default -> image;
-//                };
-            } else {
-                switch (direction) {
-                    case "up":
-                        if (spriteNum == 1) {image = up1;}
-                        else if (spriteNum == 2) {image = up2;}
-                        else if (spriteNum == 3) {image = up3;}
-                        break;
-                    case "down":
-                        if (spriteNum == 1) {image = down1;}
-                        else if (spriteNum == 2) {image = down2;}
-                        else if (spriteNum == 3) {image = down3;}
-                        break;
-                    case "left":
-                        if (spriteNum == 1) {image = left1;}
-                        else if (spriteNum == 2) {image = left2;}
-                        else if (spriteNum == 3) {image = left3;}
-                        break;
-                    case "right":
-                        if (spriteNum == 1) {image = right1;}
-                        else if (spriteNum == 2) {image = right2;}
-                        else if (spriteNum == 3) {image = right3;}
-                        break;
-                }
+            switch (direction) {
+                case "up":
+                    if (spriteNum == 1) {image = up1;}
+                    else if (spriteNum == 2) {image = up2;}
+                    else if (spriteNum == 3) {image = up3;}
+                    break; case "down": if (spriteNum == 1) {image = down1;}
+                else if (spriteNum == 2) {image = down2;}
+                else if (spriteNum == 3) {image = down3;}
+                break;
+                case "left":
+                    if (spriteNum == 1) {image = left1;}
+                    else if (spriteNum == 2) {image = left2;}
+                    else if (spriteNum == 3) {image = left3;}
+                    break; case "right": if (spriteNum == 1) {image = right1;}
+                else if (spriteNum == 2) {image = right2;}
+                else if (spriteNum == 3) {image = right3;}
+                break;
             }
 
             // Monster HP bar
@@ -258,7 +236,6 @@ public class Entity {
         }
 
     }
-
     public void dyingAnimation(Graphics2D g2) {
         dyingCounter++;
         int i = 5;
@@ -274,11 +251,9 @@ public class Entity {
             alive = false;
         }
     }
-
     public void changeAlpha(Graphics2D g2, float alphaValue) {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
-
     public BufferedImage setup(String imagePath, int width, int height) {
 
         UtilityTool uTool = new UtilityTool();

@@ -29,9 +29,6 @@ public class GamePanel extends JPanel implements Runnable{
     public int currentMap = 0;
     int FPS = 60; // Frames per second
 
-    // For full-screen
-    public boolean fullScreenOn = false;
-
     // System Settings
     TileManager tileManager = new TileManager(this);
     public KeyboardHandler keyboardHandler = new KeyboardHandler(this);
@@ -83,13 +80,13 @@ public class GamePanel extends JPanel implements Runnable{
         this.gameState = newState;
     }
 
-
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
 //        playMusic(0);
         gameState = titleState;
+        currentMap = 0;
     }
 
     public void retry() {
@@ -258,13 +255,6 @@ public class GamePanel extends JPanel implements Runnable{
     public void stopMusic() {
         music.stop();
     }
-//    public void stopBgm(int i) {
-//
-//        music.setFile(i);
-//        music.stop();
-//
-//    }
-
 
     public void playSE(int i) {
         se.setFile(i);
