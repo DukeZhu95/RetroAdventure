@@ -65,6 +65,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // Customizing the gender of the role
     public boolean isMale = true;
+    public boolean isMaleAttacking = true;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));

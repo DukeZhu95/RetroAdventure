@@ -6,8 +6,10 @@ import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Wood;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player extends Entity{
@@ -123,7 +125,8 @@ public class Player extends Entity{
     }
 
     public void getPlayerAttackImage() {
-        if (gp.isMale) {
+        System.out.println("getPlayerAttackImage() called");
+        if (gp.isMaleAttacking) {
             // Male Player Attack
             MaleAttackUp1 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
             MaleAttackUp2 = setup("/Res/player/Male_attack_up2", gp.tileSize, gp.tileSize * 2);
@@ -144,6 +147,7 @@ public class Player extends Entity{
             FemaleAttackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
             FemaleAttackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
         }
+        System.out.println("getPlayerAttackImage() finished");
     }
 
     public void update() {
@@ -247,7 +251,6 @@ public class Player extends Entity{
     }
 
     public void attacking() {
-//        System.out.println("Male is attacking, spriteNum: " + spriteNum);
         attackCounter += 3;
         if (attackCounter <= 15) {
             spriteNum = 1;
@@ -302,9 +305,11 @@ public class Player extends Entity{
         }
 
         // Gender-specific attack animation
+        getPlayerAttackImage();
+        gp.isMaleAttacking = gp.isMale;
         switch (direction) {
             case "up":
-                if (gp.isMale) {
+                if (gp.isMaleAttacking) {
                     image = spriteNum == 1 ? MaleAttackUp1 : MaleAttackUp2;
                 } else {
                     image = spriteNum == 1 ? FemaleAttackUp1 : FemaleAttackUp2;
@@ -312,7 +317,7 @@ public class Player extends Entity{
                 break;
 
             case "down":
-                if (gp.isMale) {
+                if (gp.isMaleAttacking) {
                     image = spriteNum == 1 ? MaleAttackDown1 : MaleAttackDown2;
                 } else {
                     image = spriteNum == 1 ? FemaleAttackDown1 : FemaleAttackDown2;
@@ -320,7 +325,7 @@ public class Player extends Entity{
                 break;
 
             case "left":
-                if (gp.isMale) {
+                if (gp.isMaleAttacking) {
                     image = spriteNum == 1 ? MaleAttackLeft1 : MaleAttackLeft2;
                 } else {
                     image = spriteNum == 1 ? FemaleAttackLeft1 : FemaleAttackLeft2;
@@ -328,7 +333,7 @@ public class Player extends Entity{
                 break;
 
             case "right":
-                if (gp.isMale) {
+                if (gp.isMaleAttacking) {
                     image = spriteNum == 1 ? MaleAttackRight1 : MaleAttackRight2;
                 } else {
                     image = spriteNum == 1 ? FemaleAttackRight1 : FemaleAttackRight2;
@@ -461,7 +466,12 @@ public class Player extends Entity{
     }
 
     public void draw(Graphics2D g2) {
+//        System.out.println("attacking: " + attacking);
+//        System.out.println("spriteNum: " + spriteNum);
+//        System.out.println("MaleAttackUp1: " + MaleAttackUp1);
+//        System.out.println("isMaleAttacking: " + gp.isMaleAttacking);
         BufferedImage image = null;
+        getPlayerAttackImage();
 
         int tempScreenX = screenX;
         int tempScreenY = screenY;
@@ -470,7 +480,7 @@ public class Player extends Entity{
             case "up":
                 if (attacking) {
                     tempScreenY = screenY - gp.tileSize;
-                    image = spriteNum == 1 ? (gp.isMale ? MaleAttackUp1 : FemaleAttackUp1) : (gp.isMale ? MaleAttackUp2 : FemaleAttackUp2);
+                    image = spriteNum == 1 ? (gp.isMaleAttacking ? MaleAttackUp1 : FemaleAttackUp1) : (gp.isMaleAttacking ? MaleAttackUp2 : FemaleAttackUp2);
                 } else {
                     if (spriteNum == 1) {image = up1;}
                     else if (spriteNum == 2) {image = up2;}
@@ -479,7 +489,7 @@ public class Player extends Entity{
                 break;
             case "down":
                 if (attacking) {
-                    image = spriteNum == 1 ? (gp.isMale ? MaleAttackDown1 : FemaleAttackDown1) : (gp.isMale ? MaleAttackDown2 : FemaleAttackDown2);
+                    image = spriteNum == 1 ? (gp.isMaleAttacking ? MaleAttackDown1 : FemaleAttackDown1) : (gp.isMaleAttacking ? MaleAttackDown2 : FemaleAttackDown2);
                 } else {
                     if (spriteNum == 1) {image = down1;}
                     else if (spriteNum == 2) {image = down2;}
@@ -489,7 +499,7 @@ public class Player extends Entity{
             case "left":
                 if (attacking) {
                     tempScreenX = screenX - gp.tileSize;
-                    image = spriteNum == 1 ? (gp.isMale ? MaleAttackLeft1 : FemaleAttackLeft1) : (gp.isMale ? MaleAttackLeft2 : FemaleAttackLeft2);
+                    image = spriteNum == 1 ? (gp.isMaleAttacking ? MaleAttackLeft1 : FemaleAttackLeft1) : (gp.isMaleAttacking ? MaleAttackLeft2 : FemaleAttackLeft2);
                 } else {
                     if (spriteNum == 1) {image = left1;}
                     else if (spriteNum == 2) {image = left2;}
@@ -498,7 +508,7 @@ public class Player extends Entity{
                 break;
             case "right":
                 if (attacking) {
-                    image = spriteNum == 1 ? (gp.isMale ? MaleAttackRight1 : FemaleAttackRight1) : (gp.isMale ? MaleAttackRight2 : FemaleAttackRight2);
+                    image = spriteNum == 1 ? (gp.isMaleAttacking ? MaleAttackRight1 : FemaleAttackRight1) : (gp.isMaleAttacking ? MaleAttackRight2 : FemaleAttackRight2);
                 } else {
                     if (spriteNum == 1) {image = right1;}
                     else if (spriteNum == 2) {image = right2;}
@@ -515,5 +525,4 @@ public class Player extends Entity{
         // Reset AlphaComposite
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
-
 }
