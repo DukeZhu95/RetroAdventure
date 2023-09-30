@@ -681,6 +681,7 @@ public class UI {
                 gp.gameState = gp.titleState;
                 titleScreenState = 0;
                 gp.stopMusic();
+                gp.keyboardHandler.musicIsPlaying = false;
                 gp.restart();
             }
         }

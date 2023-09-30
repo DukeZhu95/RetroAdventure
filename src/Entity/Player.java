@@ -125,7 +125,7 @@ public class Player extends Entity{
     }
 
     public void getPlayerAttackImage() {
-        System.out.println("getPlayerAttackImage() called");
+//        System.out.println("getPlayerAttackImage() called");
         if (gp.isMaleAttacking) {
             // Male Player Attack
             MaleAttackUp1 = setup("/Res/player/Male_attack_up1", gp.tileSize, gp.tileSize * 2);
@@ -147,7 +147,7 @@ public class Player extends Entity{
             FemaleAttackRight1 = setup("/Res/player/Female_attack_right1", gp.tileSize * 2, gp.tileSize);
             FemaleAttackRight2 = setup("/Res/player/Female_attack_right2", gp.tileSize * 2, gp.tileSize);
         }
-        System.out.println("getPlayerAttackImage() finished");
+//        System.out.println("getPlayerAttackImage() finished");
     }
 
     public void update() {
