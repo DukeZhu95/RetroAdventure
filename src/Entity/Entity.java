@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
-    GamePanel gp;
+    protected GamePanel gp;
     public BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
     public BufferedImage MaleAttackUp1, MaleAttackUp2, MaleAttackDown1, MaleAttackDown2, MaleAttackLeft1, MaleAttackLeft2, MaleAttackRight1, MaleAttackRight2;
     public BufferedImage FemaleAttackUp1, FemaleAttackUp2, FemaleAttackDown1, FemaleAttackDown2, FemaleAttackLeft1, FemaleAttackLeft2, FemaleAttackRight1, FemaleAttackRight2;

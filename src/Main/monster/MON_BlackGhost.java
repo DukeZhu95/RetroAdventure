@@ -7,19 +7,18 @@ import object.OBJ_Heart;
 
 import java.util.Random;
 
-public class MON_GreenSlime extends Entity {
-    GamePanel gp;
-    public MON_GreenSlime(GamePanel gp) {
+public class MON_BlackGhost extends Entity {
+    public MON_BlackGhost(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
         type = type_monster;
-        name = "GreenSlime";
-        speed = 1;
-        maxLife = 8;
+        name = "BlackGhost";
+        speed = 2;
+        maxLife = 4;
         life = maxLife;
-        attack = 5;
-        defense = 1;
+        attack = 4;
+        defense = 0;
         exp = 2;
 
         solidArea.x = 6;
@@ -33,18 +32,18 @@ public class MON_GreenSlime extends Entity {
     }
 
     public void getImage() {
-        up1 = setup("/Res/monsters/Slime_green_L1", gp.tileSize, gp.tileSize);
-        up2 = setup("/Res/monsters/Slime_green_L2", gp.tileSize, gp.tileSize);
-        up3 = setup("/Res/monsters/Slime_green_L3", gp.tileSize, gp.tileSize);
-        down1 = setup("/Res/monsters/Slime_green_R1", gp.tileSize, gp.tileSize);
-        down2 = setup("/Res/monsters/Slime_green_R2", gp.tileSize, gp.tileSize);
-        down3 = setup("/Res/monsters/Slime_green_R3", gp.tileSize, gp.tileSize);
-        left1 = setup("/Res/monsters/Slime_green_L1", gp.tileSize, gp.tileSize);
-        left2 = setup("/Res/monsters/Slime_green_L2", gp.tileSize, gp.tileSize);
-        left3 = setup("/Res/monsters/Slime_green_L3", gp.tileSize, gp.tileSize);
-        right1 = setup("/Res/monsters/Slime_green_R1", gp.tileSize, gp.tileSize);
-        right2 = setup("/Res/monsters/Slime_green_R2", gp.tileSize, gp.tileSize);
-        right3 = setup("/Res/monsters/Slime_green_R3", gp.tileSize, gp.tileSize);
+        up1 = setup("/Res/monsters/Ghost_black_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/Res/monsters/Ghost_black_2", gp.tileSize, gp.tileSize);
+        up3 = setup("/Res/monsters/Ghost_black_3", gp.tileSize, gp.tileSize);
+        down1 = setup("/Res/monsters/Ghost_black_3", gp.tileSize, gp.tileSize);
+        down2 = setup("/Res/monsters/Ghost_black_4", gp.tileSize, gp.tileSize);
+        down3 = setup("/Res/monsters/Ghost_black_5", gp.tileSize, gp.tileSize);
+        left1 = setup("/Res/monsters/Ghost_black_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/Res/monsters/Ghost_black_2", gp.tileSize, gp.tileSize);
+        left3 = setup("/Res/monsters/Ghost_black_3", gp.tileSize, gp.tileSize);
+        right1 = setup("/Res/monsters/Ghost_black_3", gp.tileSize, gp.tileSize);
+        right2 = setup("/Res/monsters/Ghost_black_4", gp.tileSize, gp.tileSize);
+        right3 = setup("/Res/monsters/Ghost_black_5", gp.tileSize, gp.tileSize);
     }
 
     public void setAction() {
@@ -75,8 +74,6 @@ public class MON_GreenSlime extends Entity {
 
     public void damageReaction() {
         actionLockCounter = 0;
-
-//        direction = gp.player.direction; // Escape from the player
 
         // Calculate the differences in position between the player and the monster
         int diffX = gp.player.worldX - worldX;

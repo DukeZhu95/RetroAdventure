@@ -2,7 +2,9 @@ package Main;
 
 import Entity.NPC_Merchant;
 import Entity.NPC_Tigger;
+import Main.monster.MON_BlackGhost;
 import Main.monster.MON_GreenSlime;
+import Main.monster.MON_GreyBat;
 import object.*;
 
 public class AssetSetter {
@@ -65,6 +67,8 @@ public class AssetSetter {
     public void setMonster() {
         int mapNum = 0;
         int i = 0;
+
+        // Slimes
         gp.monster[mapNum][i] = new MON_GreenSlime(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize * 23;
         gp.monster[mapNum][i].worldY = gp.tileSize * 36;
@@ -85,6 +89,60 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldX = gp.tileSize * 38;
         gp.monster[mapNum][i].worldY = gp.tileSize * 42;
         i++;
+        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 40;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 40;
+
+        // Bats
+        gp.monster[mapNum][i] = new MON_GreyBat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 39;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 8;
+        i++;
+        gp.monster[mapNum][i] = new MON_GreyBat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 36;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 40;
+        i++;
+        gp.monster[mapNum][i] = new MON_GreyBat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 36;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 31;
+        i++;
+        gp.monster[mapNum][i] = new MON_GreyBat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 37;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 9;
+        i++;
+        gp.monster[mapNum][i] = new MON_GreyBat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 38;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 15;
+        i++;
+        gp.monster[mapNum][i] = new MON_GreyBat(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 39;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 10;
+
+        // Ghosts
+        gp.monster[mapNum][i] = new MON_BlackGhost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 10;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 30;
+        i++;
+        gp.monster[mapNum][i] = new MON_BlackGhost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 11;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 29;
+        i++;
+        gp.monster[mapNum][i] = new MON_BlackGhost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 14;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 32;
+        i++;
+        gp.monster[mapNum][i] = new MON_BlackGhost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 15;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 33;
+        i++;
+        gp.monster[mapNum][i] = new MON_BlackGhost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 24;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 36;
+        i++;
+        gp.monster[mapNum][i] = new MON_BlackGhost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize * 40;
+        gp.monster[mapNum][i].worldY = gp.tileSize * 39;
+
 
 //        mapNum = 1;
 //        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
