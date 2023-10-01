@@ -140,7 +140,7 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize * 36;
         i++;
         gp.monster[mapNum][i] = new MON_BlackGhost(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize * 40;
+        gp.monster[mapNum][i].worldX = gp.tileSize * 39;
         gp.monster[mapNum][i].worldY = gp.tileSize * 39;
 
 
