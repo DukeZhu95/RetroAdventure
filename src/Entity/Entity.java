@@ -66,6 +66,8 @@ public class Entity {
     public int defenseValue;
     public String description = "";
     public int price;
+    public boolean stackable = false;
+    public int amount = 1;
 
     // Type
     public int type; // 0: Player, 1: NPC, 2: Monster

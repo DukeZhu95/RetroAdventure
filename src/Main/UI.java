@@ -416,6 +416,26 @@ public class UI {
             g2.setStroke(new BasicStroke(3));
             g2.drawRoundRect(slotX, slotY, slotSize, slotSize, 10, 10);
             g2.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
+
+            // Display amount
+            if (entity == gp.player && entity.inventory.get(i).amount > 1) {
+                g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32f));
+                int amountX;
+                int amountY;
+
+                String s = "" + entity.inventory.get(i).amount;
+                amountX = getXforAlignToRightText(s, slotX + gp.tileSize + 10);
+                amountY = slotY + gp.tileSize;
+
+                // Shadow
+                g2.setColor(Color.BLACK);
+                g2.drawString(s, amountX, amountY);
+
+                // Number
+                g2.setColor(Color.WHITE);
+                g2.drawString(s, amountX - 3, amountY - 3);
+            }
+
             slotX += slotSize;
             if (i == 4 || i == 9 || i == 14) {
                 slotX = slotXstart;
@@ -822,15 +842,26 @@ public class UI {
                 currentDialogue = "You don't have enough money!";
                 drawDialogueScreen();
             }
-            else if (gp.player.inventory.size() == gp.player.maxInventorySize) {
-                subState = 0;
-                gp.gameState = gp.dialogueState;
-                currentDialogue = "Your inventory is full!";
-            }
             else {
-                gp.player.coin -= npc.inventory.get(itemIndex).price;
-                gp.player.inventory.add(npc.inventory.get(itemIndex));
+                if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
+                    gp.player.coin -= npc.inventory.get(itemIndex).price;
+                }
+                else {
+                    subState = 0;
+                    gp.gameState = gp.dialogueState;
+                    currentDialogue = "Your inventory is full!";
+                    drawDialogueScreen();
+                }
             }
+//            else if (gp.player.inventory.size() == gp.player.maxInventorySize) {
+//                subState = 0;
+//                gp.gameState = gp.dialogueState;
+//                currentDialogue = "Your inventory is full!";
+//            }
+//            else {
+//                gp.player.coin -= npc.inventory.get(itemIndex).price;
+//                gp.player.inventory.add(npc.inventory.get(itemIndex));
+//            }
         }
     }
 
@@ -880,8 +911,6 @@ public class UI {
         }
 
         // Sell an item
-
-        // Sell an item
         int price = 0;
 
         if (itemIndex >= 0 && itemIndex < gp.player.inventory.size()) {
@@ -901,8 +930,13 @@ public class UI {
                 drawDialogueScreen();
             }
             else {
+                if (gp.player.inventory.get(itemIndex).amount > 1) {
+                    gp.player.inventory.get(itemIndex).amount--;
+                }
+                else {
+                    gp.player.inventory.remove(itemIndex);
+                }
                 gp.player.coin += price;
-                gp.player.inventory.remove(itemIndex);
             }
         }
 
