@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Player player = new Player(this, keyboardHandler);
     public Entity[][] obj = new Entity[maxMap][20];
     public Entity[][] npc = new Entity[maxMap][10];
-    public Entity[][] monster = new Entity[maxMap][20];
+    public Entity[][] monster = new Entity[maxMap][80];
     ArrayList<Entity> entityList = new ArrayList<>();
 
     // Game State
@@ -93,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void retry() {
+        currentMap = 0;
         player.setDefaultPositions();
         player.restoreLife();
         aSetter.setNPC();
@@ -101,6 +102,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void restart() {
+        currentMap = 0;
         player.setDefaultValues();
         player.setDefaultPositions();
         player.restoreLife();
@@ -175,9 +177,6 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
             }
-        }
-        if (gameState == pauseState) {
-            // Do nothing
         }
     }
 
