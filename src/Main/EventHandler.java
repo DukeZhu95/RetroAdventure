@@ -52,31 +52,22 @@ public class EventHandler {
             if (hit(0,27, 16, "right")) {damagePit(gp.dialogueState);}
 //            if (hit(0,23, 19, "any")) {damagePit(gp.dialogueState);}
             else if (hit(0,23, 12, "up")) {healingPool(gp.dialogueState);}
-            else if (hit(0,10,39,"any")) {telePort1(1,12,13);}
-            else if (hit(1,12,13,"any")) {telePort2(0,10,39);}
+            else if (hit(0,10,39,"any")) {teleport(1,12,13);}
+            else if (hit(1,12,13,"any")) {teleport(0,10,39);}
             else if (hit(1,12,9,"up")) {speak(gp.npc[1][0]);}
+            else if (hit(0,12,9,"any")) {teleport(2,9,41);} // To the dungeon
+            else if (hit(2,9,41,"any")) {teleport(0,12,9);} // To outside
+            else if (hit(2,8,7,"any")) {teleport(3,26,41);} // To B2
+            else if (hit(3,26,41,"any")) {teleport(2,8,7);} // To B1
         }
     }
 
-    public void telePort1(int map, int col, int row) {
+    public void teleport(int map, int col, int row) {
         gp.gameState = gp.transitionState;
         tempMap = map;
         tempCol = col;
         tempRow = row;
         canTouchEvent = false;
-//        gp.playSE(12);
-    }
-
-    public void telePort2(int map, int col, int row) {
-        gp.gameState = gp.transitionState;
-        tempMap = map;
-        tempCol = col;
-        tempRow = row;
-        canTouchEvent = false;
-//        gp.stopMusic();
-//        System.out.println("Bgm12 has been stopped!");
-//        gp.playSE(0);
-
     }
 
     public boolean hit(int map, int col, int row, String reqDirection) {
@@ -125,9 +116,10 @@ public class EventHandler {
     public void healingPool(int gameState) {
         if (gp.keyboardHandler.enterPressed) {
             gp.gameState = gameState;
-            gp.ui.currentDialogue = "The Healing Pool has recovered your life!";
+            gp.ui.currentDialogue = "The Healing Pool has recovered your life! \n(Your game has been saved!))";
             gp.player.life = gp.player.maxLife;
             gp.aSetter.setMonster();
+            gp.saveLoad.save();
         }
     }
 }

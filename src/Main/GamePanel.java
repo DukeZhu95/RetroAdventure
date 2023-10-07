@@ -1,5 +1,6 @@
 package Main;
 
+import Data.SaveLoad;
 import Entity.Entity;
 import Entity.Player;
 import Entity.NPC_Tigger;
@@ -39,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable{
     public UI ui = new UI(this);
     public EventHandler eventHandler = new EventHandler(this);
     Config config = new Config(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread;
 
     // Entities & Objects

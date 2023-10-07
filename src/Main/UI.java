@@ -416,6 +416,13 @@ public class UI {
             g2.setStroke(new BasicStroke(3));
             g2.drawRoundRect(slotX, slotY, slotSize, slotSize, 10, 10);
             g2.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
+//            Entity item = entity.inventory.get(i);
+//            if (item != null) {
+//                g2.drawImage(item.down1, slotX, slotY, null);
+//            } else {
+//                System.out.println("Error: Item at index " + i + " is null");
+//            }
+
 
             // Display amount
             if (entity == gp.player && entity.inventory.get(i).amount > 1) {

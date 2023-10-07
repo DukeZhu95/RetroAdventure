@@ -268,6 +268,9 @@ public class KeyboardHandler implements KeyListener {
                 }
                 if (gp.ui.commandNum == 1) {
                     // Implement load game later
+                    gp.saveLoad.load();
+                    gp.gameState = gp.playState;
+                    gp.playMusic(12);
                 }
                 if (gp.ui.commandNum == 2) {
                     System.exit(0);

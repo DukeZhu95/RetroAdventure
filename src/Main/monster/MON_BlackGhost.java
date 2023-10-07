@@ -15,7 +15,7 @@ public class MON_BlackGhost extends Entity {
         type = type_monster;
         name = "BlackGhost";
         speed = 2;
-        maxLife = 4;
+        maxLife = 8;
         life = maxLife;
         attack = 4;
         defense = 0;

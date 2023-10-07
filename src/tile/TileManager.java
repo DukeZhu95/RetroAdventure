@@ -23,12 +23,14 @@ public class TileManager {
         getTileImage();
         loadMap("/Res/maps/worldV3.txt", 0);
         loadMap("/Res/maps/interior01.txt", 1);
+        loadMap("/Res/maps/dungeon01.txt", 2);
+        loadMap("/Res/maps/dungeon02.txt", 3);
     }
 
     public void getTileImage() {
 
         // Placeholder
-        setup(0, "grass00", false);
+        setup(0, "black", true);
         setup(1, "grass00", true);
         setup(2, "grass00", true);
         setup(3, "grass00", false);
@@ -75,6 +77,11 @@ public class TileManager {
         setup(42, "Underground", false);
         setup(43, "floor01", false);
         setup(44, "table01", true);
+
+        // Dungeon tiles
+        setup(45, "downstair", false);
+        setup(46, "upstair", false);
+        setup(47, "dungeonWall", true);
     }
 
     public void setup(int index, String imageName, boolean collision) {
